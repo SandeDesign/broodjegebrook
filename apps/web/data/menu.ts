@@ -17,153 +17,127 @@ export interface MenuItem {
 
 export interface ExtraOption { name: string; price: number; }
 
-/** Standaard extras per categorie (kies meerdere) */
 export const categoryExtras: Record<string, ExtraOption[]> = {
-  pizza:        [{ name: "Extra kaas", price: 1.50 }, { name: "Extra salami", price: 2.00 }, { name: "Extra ham", price: 2.00 }, { name: "Extra ui", price: 0.75 }, { name: "Extra champignons", price: 1.00 }, { name: "Extra ananas", price: 1.50 }],
-  gevuld:       [{ name: "Extra kaas", price: 1.50 }, { name: "Extra vlees", price: 2.00 }],
-  pasta:        [{ name: "Extra kaas", price: 1.50 }, { name: "Extra vlees", price: 2.00 }],
-  kapsalon:     [{ name: "Extra kaas", price: 1.50 }, { name: "Extra vlees", price: 2.50 }, { name: "Extra friet", price: 2.00 }],
-  schotels:     [{ name: "Extra vlees", price: 2.50 }, { name: "Extra friet", price: 2.00 }, { name: "Extra brood", price: 1.50 }, { name: "Extra saus", price: 0.75 }],
-  durum:        [{ name: "Extra vlees", price: 2.00 }, { name: "Extra kaas", price: 1.50 }, { name: "Extra saus", price: 0.75 }],
-  hamburgers:   [{ name: "Extra kaas", price: 1.00 }, { name: "Extra bacon", price: 1.50 }, { name: "Extra patty", price: 3.00 }],
-  broodjes:     [{ name: "Extra kaas", price: 1.00 }, { name: "Extra vlees", price: 2.00 }, { name: "Extra saus", price: 0.75 }],
-  menus:        [{ name: "Extra saus", price: 0.75 }],
-  friet:        [{ name: "Extra saus", price: 0.75 }, { name: "Kaas erover", price: 1.50 }, { name: "Uitjes", price: 0.50 }],
-  snacks:       [{ name: "Extra saus", price: 0.75 }],
-  bijgerechten: [],
-  extras:       [],
-  dranken:      [],
+  broodjes:     [{ name: "Extra kaas", price: 1.00 }, { name: "Extra vlees", price: 2.00 }, { name: "Extra saus", price: 0.50 }],
+  burgers:      [{ name: "Extra kaas", price: 1.00 }, { name: "Extra bacon", price: 1.50 }, { name: "Extra patty", price: 3.00 }],
+  uitsmijters:  [{ name: "Extra ei", price: 1.00 }, { name: "Extra kaas", price: 1.00 }],
+  stokbroodjes: [{ name: "Extra kaas", price: 1.00 }, { name: "Extra vlees", price: 2.00 }, { name: "Extra saus", price: 0.50 }],
+  salades:      [{ name: "Extra kip", price: 2.00 }, { name: "Extra dressing", price: 0.50 }],
+  bagels:       [{ name: "Extra kaas", price: 1.00 }, { name: "Extra beleg", price: 2.00 }],
+  tostis:       [{ name: "Extra kaas", price: 1.00 }, { name: "Extra beleg", price: 1.50 }],
+  wraps:        [{ name: "Extra vlees", price: 2.00 }, { name: "Extra saus", price: 0.50 }],
+  sauzen:       [],
+  frisdranken:  [],
+  snoep:        [],
 };
 
-/** Beschikbare sauzen per categorie (kies 1 verplicht) */
 export const categorySauces: Record<string, string[]> = {
-  schotels: ["Knoflook", "Andalouse", "Cocktail", "Sambal", "Chili", "Mayo", "Curry", "Samurai"],
-  durum:    ["Knoflook", "Andalouse", "Cocktail", "Sambal", "Chili"],
-  kapsalon: ["Knoflook", "Andalouse", "Cocktail", "Sambal", "Chili"],
-  friet:    ["Mayo", "Ketchup", "Andalouse", "Cocktail", "Knoflook", "Curry"],
-  broodjes: ["Knoflook", "Andalouse", "Sambal", "Geen saus"],
-  snacks:   ["Mayo", "Ketchup", "Curry", "Geen saus"],
+  broodjes:     ["Knoflook", "Andalouse", "Cocktail", "Sambal", "Geen saus"],
+  burgers:      ["Andalouse", "Cocktail", "Samurai", "Mosterd", "Honing-mosterd", "Geen saus"],
+  stokbroodjes: ["Knoflook", "Andalouse", "Cocktail", "Sambal", "Mayo", "Geen saus"],
+  wraps:        ["Knoflook", "Andalouse", "Sambal", "Geen saus"],
+  tostis:       ["Knoflook", "Andalouse", "Geen saus"],
 };
 
-/** Optionele maat-keuze per categorie */
-export const categorySizes: Record<string, string[]> = {
-  pasta: ["Spaghetti", "Macaroni"],
-};
+export const categorySizes: Record<string, string[]> = {};
 
 export const categories: MenuCategory[] = [
-  { id: "pizza", name: "Pizza", description: "Versgebakken in onze steenoven op 380°C" },
-  { id: "gevuld", name: "Gevulde Pizza's", description: "Calzone's. Dichtgevouwen en overgegoten met saus" },
-  { id: "pasta", name: "Pasta's", description: "Overbakken met kaas, keuze uit spaghetti of macaroni" },
-  { id: "kapsalon", name: "Kapsalon", description: "De klassieker. Friet, vlees, kaas en salade" },
-  { id: "schotels", name: "Schotel Specialiteiten", description: "Dagvers gemarineerd vlees, saus naar keuze" },
-  { id: "durum", name: "Dürüm", description: "Zacht flatbread gevuld met vlees en verse groenten" },
-  { id: "hamburgers", name: "Hamburgers", description: "Handgevormde burgers op de grill" },
-  { id: "broodjes", name: "Broodjes", description: "Turks brood, baguette of pita. Vers belegd" },
-  { id: "menus", name: "Menu's", description: "Combinaties met friet en drank" },
-  { id: "friet", name: "Friet", description: "Krokant gebakken, klein of groot" },
-  { id: "snacks", name: "Snacks", description: "Klassiekers met een twist" },
-  { id: "bijgerechten", name: "Bijgerechten", description: "Salades, sauzen en kleine extra's" },
-  { id: "extras", name: "Extra's", description: "Sauzen en porties naar keuze" },
-  { id: "dranken", name: "Dranken", description: "Fris, traditioneel of warm" },
+  { id: "broodjes",     name: "Broodjes",            description: "Vers belegd met de lekkerste ingrediënten" },
+  { id: "burgers",      name: "Burgers",              description: "Vers rundvlees, kaas en knapperig brood" },
+  { id: "uitsmijters",  name: "Uitsmijters",          description: "3 gebakken eieren, ham en kaas op stevig brood" },
+  { id: "stokbroodjes", name: "Stokbroodjes",         description: "Krokant stokbrood met jouw favoriete vulling" },
+  { id: "salades",      name: "Salades",              description: "Fris, knapperig en voedzaam" },
+  { id: "bagels",       name: "Bagels",               description: "Zacht en vers belegd" },
+  { id: "tostis",       name: "Tosti's",              description: "Goudbruin geroosterd met kaas en beleg" },
+  { id: "wraps",        name: "Wraps",                description: "Gevuld en strak gerold" },
+  { id: "sauzen",       name: "Sauzen",               description: "Portiesaus naar keuze" },
+  { id: "frisdranken",  name: "Frisdranken",          description: "Fris en koel" },
+  { id: "snoep",        name: "Diverse snoepzakjes",  description: "Leuk snoepzakje als afsluiter" },
 ];
 
 export const menuItems: MenuItem[] = [
-  // Pizza
-  { id: "p-margherita", categoryId: "pizza", name: "Margherita", description: "Tomatensaus, mozzarella, oregano", price: 10.00, tags: ["populair"] },
-  { id: "p-shoarma", categoryId: "pizza", name: "Pizza Shoarma", description: "Mozzarella, shoarmavlees, uien, paprika", price: 13.50, tags: ["populair"] },
-  { id: "p-kebab", categoryId: "pizza", name: "Pizza Kebab", description: "Mozzarella, gehakt, paprika, chilisaus", price: 13.50, tags: [] },
-  { id: "p-diavola", categoryId: "pizza", name: "Diavola", description: "Pikante salami, jalapeño, mozzarella", price: 11.50, tags: ["pittig"] },
-  { id: "p-quattro", categoryId: "pizza", name: "Quattro Stagioni", description: "Ham, champignons, artisjok, olijven", price: 12.50, tags: [] },
-  { id: "p-tonno", categoryId: "pizza", name: "Tonno", description: "Tonijn, ui, mozzarella, kappertjes", price: 12.00, tags: [] },
-  { id: "p-prosciutto", categoryId: "pizza", name: "Prosciutto", description: "Parmaham, rucola, parmezaan", price: 13.00, tags: [] },
-  { id: "p-vegetariana", categoryId: "pizza", name: "Vegetariana", description: "Gegrilde groenten, mozzarella, pesto", price: 11.00, tags: ["vegan"] },
-  { id: "p-bbq", categoryId: "pizza", name: "BBQ Chicken", description: "BBQ-saus, kip, rode ui, cheddar", price: 13.00, tags: ["nieuw"] },
-  { id: "p-kinder", categoryId: "pizza", name: "Kinder Pizza", description: "Tomatensaus, mozzarella, kleine maat", price: 7.50, tags: [] },
-  { id: "p-half", categoryId: "pizza", name: "Pizza Half/Half", description: "Kies twee smaken op één pizza", price: 14.50, tags: [] },
-  { id: "p-lahmacun", categoryId: "pizza", name: "Lahmacun", description: "Turks platbrood met gekruid lamsgehakt", price: 9.00, tags: ["populair"] },
-
-  // Gevuld
-  { id: "g-classico", categoryId: "gevuld", name: "Calzone Classico", description: "Ham, mozzarella, tomatensaus", price: 12.00, tags: [] },
-  { id: "g-shoarma", categoryId: "gevuld", name: "Calzone Shoarma", description: "Shoarmavlees, mozzarella, chilisaus", price: 13.50, tags: ["populair"] },
-  { id: "g-veg", categoryId: "gevuld", name: "Calzone Vegetarisch", description: "Gegrilde groenten, pesto, mozzarella", price: 12.00, tags: ["vegan"] },
-
-  // Pasta
-  { id: "pa-bolognese", categoryId: "pasta", name: "Pasta Bolognese", description: "Rundvleessaus, tomatensaus, mozzarella", price: 10.00, tags: ["populair"] },
-  { id: "pa-shoarma", categoryId: "pasta", name: "Pasta Shoarma", description: "Shoarmavlees, romige saus, mozzarella", price: 11.50, tags: [] },
-  { id: "pa-lasagne", categoryId: "pasta", name: "Lasagne Chef", description: "Klassieke lasagne overbakken met kaas", price: 11.00, tags: [] },
-
-  // Kapsalon
-  { id: "k-shoarma-k", categoryId: "kapsalon", name: "Kapsalon Shoarma Klein", description: "Friet, shoarma, gesmolten kaas, salade, saus", price: 9.50, tags: [] },
-  { id: "k-shoarma-g", categoryId: "kapsalon", name: "Kapsalon Shoarma Groot", description: "Friet, shoarma, gesmolten kaas, salade, saus", price: 12.00, tags: ["populair"] },
-  { id: "k-kip-k", categoryId: "kapsalon", name: "Kapsalon Kip Klein", description: "Friet, kip, gesmolten kaas, salade, saus", price: 9.50, tags: [] },
-  { id: "k-kip-g", categoryId: "kapsalon", name: "Kapsalon Kip Groot", description: "Friet, kip, gesmolten kaas, salade, saus", price: 12.00, tags: [] },
-
-  // Schotels
-  { id: "s-shoarma-k", categoryId: "schotels", name: "Shoarma Schotel Klein", description: "Shoarmavlees, friet, salade, brood, saus naar keuze", price: 10.00, tags: [] },
-  { id: "s-shoarma-g", categoryId: "schotels", name: "Shoarma Schotel Groot", description: "Shoarmavlees, friet, salade, brood, saus naar keuze", price: 14.00, tags: ["populair"] },
-  { id: "s-kip-k", categoryId: "schotels", name: "Kip Schotel Klein", description: "Gegrilde kip, friet, salade, brood, saus", price: 10.00, tags: [] },
-  { id: "s-kip-g", categoryId: "schotels", name: "Kip Schotel Groot", description: "Gegrilde kip, friet, salade, brood, saus", price: 14.00, tags: [] },
-  { id: "s-gyros-g", categoryId: "schotels", name: "Gyros Schotel", description: "Gekruid vlees, tzatziki, friet, pita", price: 14.50, tags: ["populair"] },
-  { id: "s-mixed", categoryId: "schotels", name: "Mixed Grill Schotel", description: "Shoarma, kip en lamsgehakt met friet en salade", price: 16.00, tags: ["populair"] },
-  { id: "s-falafel", categoryId: "schotels", name: "Falafel Schotel", description: "Krokante falafel, hummus, tabouleh, pita", price: 10.00, tags: ["vegan"] },
-
-  // Dürüm
-  { id: "d-shoarma", categoryId: "durum", name: "Dürüm Shoarma", description: "Flatbread, shoarma, verse groenten, saus", price: 9.00, tags: ["populair"] },
-  { id: "d-kip", categoryId: "durum", name: "Dürüm Kip", description: "Flatbread, kip, paprika, knoflooksaus", price: 9.00, tags: [] },
-  { id: "d-kebab", categoryId: "durum", name: "Dürüm Kebab", description: "Flatbread, gehakt, chilisaus, tomaat", price: 9.00, tags: [] },
-  { id: "d-falafel", categoryId: "durum", name: "Dürüm Falafel", description: "Flatbread, falafel, hummus, salade", price: 8.50, tags: ["vegan"] },
-
-  // Hamburgers
-  { id: "h-classic", categoryId: "hamburgers", name: "Classic Burger", description: "Rundvlees, cheddar, ijsbergsla, tomaat, pickles", price: 9.50, tags: [] },
-  { id: "h-bbq", categoryId: "hamburgers", name: "BBQ Burger", description: "Rundvlees, cheddar, bacon, BBQ-saus, rode ui", price: 11.00, tags: ["populair"] },
-  { id: "h-kip", categoryId: "hamburgers", name: "Kip Burger", description: "Krokante kip, honing-mosterd, sla, tomaat", price: 10.00, tags: [] },
-  { id: "h-american", categoryId: "hamburgers", name: "American Burger", description: "Dubbel rundvlees, dubbel kaas, jalapeño", price: 13.00, tags: ["pittig"] },
-
   // Broodjes
-  { id: "b-shoarma", categoryId: "broodjes", name: "Broodje Shoarma", description: "Turks brood, shoarma, knoflooksaus, salade", price: 7.50, tags: ["populair"] },
-  { id: "b-kip", categoryId: "broodjes", name: "Broodje Kip", description: "Turks brood, kip, paprika, saus", price: 7.50, tags: [] },
-  { id: "b-falafel", categoryId: "broodjes", name: "Broodje Falafel", description: "Pita, falafel, hummus, tomaat", price: 7.00, tags: ["vegan"] },
-  { id: "b-kebab", categoryId: "broodjes", name: "Broodje Kebab", description: "Turks brood, lamsgehakt, ui, peterselie", price: 7.50, tags: [] },
-  { id: "b-gyros", categoryId: "broodjes", name: "Broodje Gyros", description: "Pita, gyrosvlees, tzatziki, tomaat", price: 8.00, tags: [] },
+  { id: "br-teriyaki",   categoryId: "broodjes", name: "Broodje teriyaki kip",  description: "Lente ui, atjar tjampoer, knoflook, kipfilet en teriyaki saus", price: 8.95, tags: ["populair"] },
+  { id: "br-krokant",    categoryId: "broodjes", name: "Broodje kip krokant",   description: "Kip krokant, sla en cocktailsaus",                               price: 8.95, tags: ["populair"] },
+  { id: "br-brie",       categoryId: "broodjes", name: "Broodje brie",          description: "Brie, walnoot, honing en rucola",                                price: 8.95, tags: [] },
 
-  // Menu's
-  { id: "m-shoarma", categoryId: "menus", name: "Shoarma Menu", description: "Broodje shoarma + friet + drank", price: 12.50, tags: [] },
-  { id: "m-pizza", categoryId: "menus", name: "Pizza Menu", description: "Pizza naar keuze + drank", price: 14.00, tags: [] },
-  { id: "m-kip", categoryId: "menus", name: "Kip Menu", description: "Broodje kip + friet + drank", price: 12.50, tags: [] },
+  // Burgers
+  { id: "bu-hamburger",  categoryId: "burgers", name: "Broodje hamburger",     description: "Vers rundvlees, sla, tomaat, komkommer, augurk en saus",                        price: 9.95,  tags: ["populair"] },
+  { id: "bu-bacon",      categoryId: "burgers", name: "Bacon burger",          description: "Vers rundvlees, sla, tomaat, komkommer, augurk, saus, kaas en bacon",           price: 11.25, tags: ["populair"] },
+  { id: "bu-cheese",     categoryId: "burgers", name: "Cheese burger",         description: "Vers rundvlees, sla, tomaat, komkommer, augurk, saus en kaas",                  price: 10.25, tags: [] },
+  { id: "bu-vegan",      categoryId: "burgers", name: "Vegan burger",          description: "Vegetarische burger, sla, komkommer, augurk en saus",                           price: 9.95,  tags: ["vegan"] },
+  { id: "bu-texmex",     categoryId: "burgers", name: "Tex mex burger",        description: "Vers rundvlees, sla, kaas, jalapeño's en saus",                                 price: 11.50, tags: ["pittig"] },
+  { id: "bu-speciaal",   categoryId: "burgers", name: "Hamburger speciaal",    description: "Vers rundvlees, sla, kaas, augurk, gebakken ei, gebakken ui en saus",           price: 11.95, tags: [] },
 
-  // Friet
-  { id: "f-klein", categoryId: "friet", name: "Friet Klein", description: "Krokante huisfriet", price: 3.00, tags: [] },
-  { id: "f-groot", categoryId: "friet", name: "Friet Groot", description: "Krokante huisfriet", price: 4.50, tags: [] },
-  { id: "f-speciaal", categoryId: "friet", name: "Friet Speciaal", description: "Met mayo, ketchup en uitjes", price: 5.00, tags: ["populair"] },
-  { id: "f-saus", categoryId: "friet", name: "Friet met Saus", description: "Friet met saus naar keuze", price: 4.00, tags: [] },
+  // Uitsmijters
+  { id: "ui-spek",       categoryId: "uitsmijters", name: "Uitsmijter spek",   description: "3 sneetjes brood, 3 gebakken eieren, groenten, ham, kaas en spek", price: 8.95, tags: [] },
+  { id: "ui-standaard",  categoryId: "uitsmijters", name: "Uitsmijter",        description: "3 sneetjes brood, 3 gebakken eieren, groenten, ham en kaas",       price: 7.95, tags: [] },
 
-  // Snacks
-  { id: "sn-kipnuggets", categoryId: "snacks", name: "Kipnuggets (6 st.)", description: "Krokante kipnuggets met diopsaus", price: 5.50, tags: [] },
-  { id: "sn-kipsate", categoryId: "snacks", name: "Kipsaté (4 st.)", description: "Met huisgemaakte satésaus", price: 6.00, tags: [] },
-  { id: "sn-loempia", categoryId: "snacks", name: "Loempia (2 st.)", description: "Knapperige loempia's met zoetzure saus", price: 4.50, tags: [] },
-  { id: "sn-frikandel", categoryId: "snacks", name: "Frikandel Speciaal", description: "Frikandel, mayo, ketchup, uitjes", price: 4.00, tags: [] },
-  { id: "sn-kaassouf", categoryId: "snacks", name: "Kaassoufflé", description: "Krokante kaassoufflé met zoetzure saus", price: 3.50, tags: [] },
+  // Stokbroodjes
+  { id: "st-salami",     categoryId: "stokbroodjes", name: "Stokbroodje salami",        description: "Salami, sla en boter",                                                        price: 6.95, tags: [] },
+  { id: "st-beenham",    categoryId: "stokbroodjes", name: "Stokbroodje beenham",       description: "Beenham, sla en saus",                                                        price: 6.95, tags: [] },
+  { id: "st-spek",       categoryId: "stokbroodjes", name: "Stokbroodje spek",          description: "Spek, sla en saus",                                                           price: 6.95, tags: [] },
+  { id: "st-pesto",      categoryId: "stokbroodjes", name: "Stokbroodje pesto",         description: "Rucola, mozzarella, balsamico en pesto",                                      price: 6.95, tags: ["vegan"] },
+  { id: "st-taco",       categoryId: "stokbroodjes", name: "Stokbroodje taco",          description: "Gekruid gehakt, sla, komkommer, knoflooksaus en chilisaus",                   price: 6.95, tags: ["pittig"] },
+  { id: "st-tonijn",     categoryId: "stokbroodjes", name: "Stokbroodje tonijn",        description: "Tonijn, sla, ei en augurk",                                                   price: 8.95, tags: [] },
+  { id: "st-carpaccio",  categoryId: "stokbroodjes", name: "Stokbroodje carpaccio",     description: "Carpaccio, rucola, pijnboompitten, truffelmayonaise en zongedroogde tomaat", price: 8.95, tags: ["populair"] },
+  { id: "st-filet",      categoryId: "stokbroodjes", name: "Stokbroodje filet american",description: "Filet american, zout, peper, ui, ei, augurk en sla",                          price: 8.95, tags: [] },
+  { id: "st-kebab",      categoryId: "stokbroodjes", name: "Stokbroodje kebab",         description: "Kip kebab, sla en knoflooksaus",                                              price: 6.95, tags: [] },
+  { id: "st-zalm",       categoryId: "stokbroodjes", name: "Stokbroodje zalm",          description: "Zalm, roomkaas, kappertjes, rucola en pijnboompitten",                        price: 8.95, tags: [] },
+  { id: "st-gezond",     categoryId: "stokbroodjes", name: "Stokbroodje gezond",        description: "Ham, kaas, sla, saus, augurk, tomaat, ei, komkommer en wortel",              price: 6.95, tags: [] },
+  { id: "st-eiersalade", categoryId: "stokbroodjes", name: "Stokbroodje eiersalade",    description: "Sla en eiersalade",                                                           price: 6.95, tags: [] },
+  { id: "st-spekei",     categoryId: "stokbroodjes", name: "Stokbroodje spek ei",       description: "Spek, ei en saus",                                                            price: 6.95, tags: [] },
+  { id: "st-bal",        categoryId: "stokbroodjes", name: "Stokbroodje bal",           description: "Gehaktbal, sla en saus",                                                      price: 6.95, tags: [] },
+  { id: "st-kaas",       categoryId: "stokbroodjes", name: "Stokbroodje kaas",          description: "Kaas, sla en boter",                                                          price: 6.95, tags: ["vegan"] },
+  { id: "st-ham",        categoryId: "stokbroodjes", name: "Stokbroodje ham",           description: "Ham, sla en boter",                                                           price: 6.95, tags: [] },
+  { id: "st-kip",        categoryId: "stokbroodjes", name: "Stokbroodje kipfilet",      description: "Kipfilet, sla en boter",                                                      price: 6.95, tags: [] },
 
-  // Bijgerechten
-  { id: "bj-salade", categoryId: "bijgerechten", name: "Gemengde Salade", description: "IJsbergsla, tomaat, komkommer, paprika", price: 3.50, tags: ["vegan"] },
-  { id: "bj-tzatziki", categoryId: "bijgerechten", name: "Tzatziki", description: "Griekse yoghurt met komkommer en knoflook", price: 2.50, tags: ["vegan"] },
-  { id: "bj-hummus", categoryId: "bijgerechten", name: "Hummus", description: "Kikkererwtenpuree met olijfolie en paprikapoeder", price: 3.00, tags: ["vegan"] },
-  { id: "bj-pitabrood", categoryId: "bijgerechten", name: "Pita / Turks Brood", description: "Vers gebakken Turks brood of pita", price: 1.50, tags: [] },
+  // Salades
+  { id: "sa-gemengd",    categoryId: "salades", name: "Gemengde salade",   description: "Rucola, sla, cherrytomaat, komkommer, augurk, ei en wortel",                           price: 8.95, tags: ["vegan"] },
+  { id: "sa-caesar",     categoryId: "salades", name: "Caesarsalade",      description: "Pijnboompitten, rucola, sla, croutons, cherrytomaat, honing-mosterd saus en gegrilde kip", price: 8.95, tags: ["populair"] },
 
-  // Extra's
-  { id: "ex-knoflooksaus", categoryId: "extras", name: "Knoflooksaus", description: "Portie knoflooksaus", price: 0.75, tags: [] },
-  { id: "ex-sambal", categoryId: "extras", name: "Sambal", description: "Portie sambal", price: 0.75, tags: ["pittig"] },
-  { id: "ex-chili", categoryId: "extras", name: "Chilisaus", description: "Portie chilisaus", price: 0.75, tags: ["pittig"] },
-  { id: "ex-mayo", categoryId: "extras", name: "Mayonaise", description: "Portie mayonaise", price: 0.75, tags: [] },
-  { id: "ex-ketchup", categoryId: "extras", name: "Ketchup", description: "Portie ketchup", price: 0.75, tags: [] },
-  { id: "ex-cocktail", categoryId: "extras", name: "Cocktailsaus", description: "Portie cocktailsaus", price: 0.75, tags: [] },
+  // Bagels
+  { id: "ba-gezond",     categoryId: "bagels", name: "Bagel gezond",        description: "Ham, kaas, sla, saus, augurk, tomaat, ei, komkommer en wortel", price: 8.95, tags: [] },
+  { id: "ba-carpaccio",  categoryId: "bagels", name: "Bagel carpaccio",     description: "Carpaccio, rucola, pijnboompitten, balsamico en zongedroogde tomaat", price: 8.95, tags: [] },
+  { id: "ba-tonijn",     categoryId: "bagels", name: "Bagel tonijn",        description: "Tonijn, sla, ei en augurk",                                    price: 8.95, tags: [] },
+  { id: "ba-zalm",       categoryId: "bagels", name: "Bagel gerookte zalm", description: "Zalm, roomkaas, kappertjes, rucola en pijnboompitten",          price: 8.95, tags: ["populair"] },
 
-  // Dranken
-  { id: "dr-cola", categoryId: "dranken", name: "Cola 0,33L", description: "Frisse Coca-Cola", price: 2.50, tags: [] },
-  { id: "dr-cola-zero", categoryId: "dranken", name: "Cola Zero 0,33L", description: "Suikervrije Coca-Cola", price: 2.50, tags: [] },
-  { id: "dr-fanta", categoryId: "dranken", name: "Fanta 0,33L", description: "Sinaasappel-frisdrank", price: 2.50, tags: [] },
-  { id: "dr-sprite", categoryId: "dranken", name: "Sprite 0,33L", description: "Citroen-limoen frisdrank", price: 2.50, tags: [] },
-  { id: "dr-ayran", categoryId: "dranken", name: "Ayran", description: "Traditioneel Turks yoghurtdrankje", price: 2.00, tags: [] },
-  { id: "dr-water", categoryId: "dranken", name: "Water 0,5L", description: "Bron- of bruisend water", price: 1.50, tags: [] },
-  { id: "dr-ijsthee", categoryId: "dranken", name: "Ice Tea 0,33L", description: "Ijskoude thee. Perzik of citroen", price: 2.50, tags: [] },
+  // Tosti's
+  { id: "to-teriyaki",   categoryId: "tostis", name: "Tosti teriyaki",  description: "Kip teriyaki, atjar tampur, lente-ui en knoflook",              price: 6.95, tags: ["populair"] },
+  { id: "to-kebab",      categoryId: "tostis", name: "Tosti kebab",     description: "Kip kebab, sla en knoflooksaus",                                price: 6.95, tags: [] },
+  { id: "to-madame",     categoryId: "tostis", name: "Tosti madame",    description: "Ham, kaas, gebakken ei en sla",                                 price: 6.95, tags: [] },
+  { id: "to-taco",       categoryId: "tostis", name: "Tosti taco",      description: "Gekruid gehakt, kaas, sla, knoflooksaus en chilisaus",           price: 6.95, tags: ["pittig"] },
+  { id: "to-standaard",  categoryId: "tostis", name: "Tosti",           description: "Ham, kaas en groente",                                          price: 6.95, tags: [] },
+
+  // Wraps
+  { id: "wr-kebab",      categoryId: "wraps", name: "Wrap kebab",    description: "Kip kebab, sla en knoflooksaus",            price: 7.95, tags: [] },
+  { id: "wr-teriyaki",   categoryId: "wraps", name: "Wrap teriyaki", description: "Kip teriyaki, sla en gebakken uitjes",       price: 7.95, tags: ["populair"] },
+  { id: "wr-taco",       categoryId: "wraps", name: "Wrap taco",     description: "Gekruid gehakt, kaas, sla, knoflooksaus en chilisaus", price: 7.95, tags: ["pittig"] },
+
+  // Sauzen
+  { id: "sz-andalouse",  categoryId: "sauzen", name: "Andalouse saus",     description: "Portie andalouse saus",       price: 0.50, tags: [] },
+  { id: "sz-samurai",    categoryId: "sauzen", name: "Samuraisaus",        description: "Portie samuraisaus",          price: 0.50, tags: ["pittig"] },
+  { id: "sz-cocktail",   categoryId: "sauzen", name: "Cocktailsaus",       description: "Portie cocktailsaus",         price: 0.50, tags: [] },
+  { id: "sz-mosterd",    categoryId: "sauzen", name: "Mosterd",            description: "Portie mosterd",              price: 0.50, tags: [] },
+  { id: "sz-honing",     categoryId: "sauzen", name: "Honing-mosterd saus",description: "Portie honing-mosterd saus",  price: 0.50, tags: [] },
+  { id: "sz-ketchup",    categoryId: "sauzen", name: "Ketchup",            description: "Portie ketchup",              price: 0.50, tags: [] },
+  { id: "sz-bicky",      categoryId: "sauzen", name: "Bicky saus",         description: "Portie bicky saus",           price: 0.50, tags: [] },
+  { id: "sz-mayo",       categoryId: "sauzen", name: "Mayo",               description: "Portie mayonaise",            price: 0.50, tags: [] },
+  { id: "sz-curry",      categoryId: "sauzen", name: "Curry",              description: "Portie currysaus",            price: 0.50, tags: [] },
+
+  // Frisdranken
+  { id: "dr-chocomel",   categoryId: "frisdranken", name: "Chocomel 250ml",             description: "Chocolademelk",                                    price: 2.00, tags: [] },
+  { id: "dr-water",      categoryId: "frisdranken", name: "Primavera water 500ml",      description: "Bronwater",                                        price: 2.00, tags: [] },
+  { id: "dr-energy",     categoryId: "frisdranken", name: "Slammers Energy 250ml",      description: "Energydrank",                                      price: 3.00, tags: [] },
+  { id: "dr-fristi",     categoryId: "frisdranken", name: "Fristi 250ml",               description: "Drinkyoghurt",                                     price: 2.00, tags: [] },
+  { id: "dr-pepsizero",  categoryId: "frisdranken", name: "Pepsi Zero Sugar Cherry 330ml", description: "Suikervrije Pepsi met kersensmaak",             price: 2.50, tags: [] },
+  { id: "dr-fuzztea",    categoryId: "frisdranken", name: "Fuze Tea Perzik Hibiscus 330ml", description: "Getrokken zwarte thee met perziksap en hibiscus", price: 2.50, tags: [] },
+  { id: "dr-appelsap",   categoryId: "frisdranken", name: "Juice Tree appelsap 330ml",  description: "Vers appelsap",                                    price: 2.50, tags: [] },
+  { id: "dr-pepsi",      categoryId: "frisdranken", name: "Pepsi regular 330ml",        description: "Frisse cola",                                      price: 2.50, tags: [] },
+  { id: "dr-pepsizero2", categoryId: "frisdranken", name: "Pepsi Zero Sugar 330ml",     description: "Suikervrije Pepsi",                                price: 2.50, tags: [] },
+
+  // Snoep
+  { id: "sn-gewoon",     categoryId: "snoep", name: "Snoepzakje met gewoon snoep",    description: "Keuze uit gesuikerd snoep en gewoon snoep", price: 2.50, tags: [] },
+  { id: "sn-gesuikerd",  categoryId: "snoep", name: "Snoepzakje met gesuikerd snoep", description: "Heerlijk gesuikerd snoep",                   price: 2.50, tags: [] },
+  { id: "sn-drop",       categoryId: "snoep", name: "Snoepzakje met gemengde drop",   description: "Gemengde drop",                              price: 2.50, tags: [] },
 ];

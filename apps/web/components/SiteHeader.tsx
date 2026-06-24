@@ -2,10 +2,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { User } from "lucide-react";
-import { restaurant } from "@/data/restaurant";
 import { cn } from "@eufraat/ui";
 import { AccountModal } from "@/components/AccountModal";
-import { ThemeSwitch } from "@/components/ThemeSwitch";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,33 +20,29 @@ export function SiteHeader() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 z-50 transition-colors duration-300 lg:hidden bg-ink",
+          "fixed inset-x-0 z-50 transition-all duration-300 lg:hidden bg-white",
           "pt-[env(safe-area-inset-top)]",
-          scrolled ? "border-b border-line/[0.06]" : "",
+          scrolled ? "border-b border-[rgb(var(--border))] shadow-sm" : "",
         )}
         style={{ top: 0, transform: "translateZ(0)" }}
       >
         <div className="h-16 px-4 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-ink ring-1 ring-gold/40 overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={restaurant.logo} alt={restaurant.name} className="h-9 w-9 object-contain" />
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[rgb(var(--accent))] shrink-0">
+              <span className="font-display text-base font-bold text-white italic">BG</span>
             </span>
-            <span className="font-display text-2xl font-semibold italic text-cream">Eufraat</span>
+            <span className="font-display text-xl font-bold text-[rgb(var(--text))]">Broodje Gebrook</span>
           </Link>
 
-          {/* Right cluster: theme switch + account */}
-          <div className="flex items-center gap-2">
-            <ThemeSwitch />
-            <button
-              onClick={() => setAccountOpen(true)}
-              aria-label="Mijn account"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-line/[0.07] border border-line/[0.1] text-cream/80 hover:text-cream hover:border-gold/40 active:scale-95 transition-all"
-            >
-              <User className="h-4.5 w-4.5" />
-            </button>
-          </div>
+          {/* Account */}
+          <button
+            onClick={() => setAccountOpen(true)}
+            aria-label="Mijn account"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(var(--border))] text-[rgb(var(--text-soft))] hover:text-[rgb(var(--accent))] active:scale-95 transition-all"
+          >
+            <User className="h-4.5 w-4.5" />
+          </button>
         </div>
       </header>
 
