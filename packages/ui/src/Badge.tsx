@@ -1,0 +1,34 @@
+import * as React from "react";
+import { cn } from "./cn";
+
+type Tone = "neutral" | "green" | "red" | "amber" | "blue";
+
+const tones: Record<Tone, string> = {
+  neutral: "bg-stone-100 text-stone-700",
+  green: "bg-emerald-100 text-emerald-800",
+  red: "bg-red-100 text-red-800",
+  amber: "bg-amber-100 text-amber-800",
+  blue: "bg-blue-100 text-blue-800",
+};
+
+export function Badge({
+  tone = "neutral",
+  className,
+  children,
+}: {
+  tone?: Tone;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium",
+        tones[tone],
+        className,
+      )}
+    >
+      {children}
+    </span>
+  );
+}

@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isStaff() {
+      return request.auth != null && request.auth.token.staff == true;
+    }
+    function isManagerOrOwner() {
+      return isStaff() && request.auth.token.role in ['owner', 'manager'];
+    }
+
+    // Menu-foto's: publiek lezen, manager+ schrijven, max 5 MB, alleen images
+    match /menu/{itemId}/{file=**} {
+      allow read: if true;
+      allow write: if isManagerOrOwner()
+                   && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    // Sfeerfoto's (hero, carousels): zelfde regels
+    match /sfeer/{file=**} {
+      allow read: if true;
+      allow write: if isManagerOrOwner()
+                   && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
