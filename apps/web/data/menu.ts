@@ -18,25 +18,34 @@ export interface MenuItem {
 export interface ExtraOption { name: string; price: number; }
 
 export const categoryExtras: Record<string, ExtraOption[]> = {
-  broodjes:     [{ name: "Extra kaas", price: 1.00 }, { name: "Extra vlees", price: 2.00 }, { name: "Extra saus", price: 0.50 }],
+  broodjes:     [{ name: "Extra kaas", price: 1.00 }, { name: "Extra vlees", price: 2.00 }],
   burgers:      [{ name: "Extra kaas", price: 1.00 }, { name: "Extra bacon", price: 1.50 }, { name: "Extra patty", price: 3.00 }],
   uitsmijters:  [{ name: "Extra ei", price: 1.00 }, { name: "Extra kaas", price: 1.00 }],
-  stokbroodjes: [{ name: "Extra kaas", price: 1.00 }, { name: "Extra vlees", price: 2.00 }, { name: "Extra saus", price: 0.50 }],
-  salades:      [{ name: "Extra kip", price: 2.00 }, { name: "Extra dressing", price: 0.50 }],
+  stokbroodjes: [{ name: "Extra kaas", price: 1.00 }, { name: "Extra vlees", price: 2.00 }],
+  salades:      [{ name: "Extra kip", price: 2.00 }],
   bagels:       [{ name: "Extra kaas", price: 1.00 }, { name: "Extra beleg", price: 2.00 }],
   tostis:       [{ name: "Extra kaas", price: 1.00 }, { name: "Extra beleg", price: 1.50 }],
-  wraps:        [{ name: "Extra vlees", price: 2.00 }, { name: "Extra saus", price: 0.50 }],
+  wraps:        [{ name: "Extra vlees", price: 2.00 }],
   sauzen:       [],
   frisdranken:  [],
   snoep:        [],
 };
 
+// Alle sauzen beschikbaar als optionele toevoeging (€0,50 per saus)
+const ALL_SAUCES = [
+  "Knoflook", "Andalouse", "Cocktailsaus", "Samuraisaus",
+  "Mosterd", "Honing-mosterd", "Mayo", "Ketchup", "Bicky", "Curry",
+];
+
 export const categorySauces: Record<string, string[]> = {
-  broodjes:     ["Knoflook", "Andalouse", "Cocktail", "Sambal", "Geen saus"],
-  burgers:      ["Andalouse", "Cocktail", "Samurai", "Mosterd", "Honing-mosterd", "Geen saus"],
-  stokbroodjes: ["Knoflook", "Andalouse", "Cocktail", "Sambal", "Mayo", "Geen saus"],
-  wraps:        ["Knoflook", "Andalouse", "Sambal", "Geen saus"],
-  tostis:       ["Knoflook", "Andalouse", "Geen saus"],
+  broodjes:     ALL_SAUCES,
+  burgers:      ALL_SAUCES,
+  uitsmijters:  ALL_SAUCES,
+  stokbroodjes: ALL_SAUCES,
+  salades:      ALL_SAUCES,
+  bagels:       ALL_SAUCES,
+  tostis:       ALL_SAUCES,
+  wraps:        ALL_SAUCES,
 };
 
 export const categorySizes: Record<string, string[]> = {};

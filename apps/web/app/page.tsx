@@ -15,7 +15,6 @@ const CATEGORY_CARDS = [
   { id: "bagels",       name: "Bagels",          desc: "Zacht en vers belegd",                       emoji: "🫓", bg: "bg-stone-50",   border: "border-stone-200" },
   { id: "tostis",       name: "Tosti's",         desc: "Goudbruin geroosterd met kaas en beleg",     emoji: "🥪", bg: "bg-yellow-50",  border: "border-yellow-200" },
   { id: "wraps",        name: "Wraps",           desc: "Gevuld en strak gerold",                     emoji: "🌯", bg: "bg-lime-50",    border: "border-lime-200" },
-  { id: "sauzen",       name: "Sauzen",          desc: "Negen sauzen naar keuze",                    emoji: "🧂", bg: "bg-stone-50",   border: "border-stone-200" },
   { id: "frisdranken",  name: "Frisdranken",     desc: "Fris en koel",                               emoji: "🥤", bg: "bg-blue-50",    border: "border-blue-200" },
   { id: "snoep",        name: "Snoepzakjes",     desc: "Een leuk zakje als afsluiter",               emoji: "🍬", bg: "bg-pink-50",    border: "border-pink-200" },
 ] as const;
