@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { User } from "lucide-react";
 import { cn } from "@eufraat/ui";
 import { AccountModal } from "@/components/AccountModal";
@@ -29,16 +28,13 @@ export function SiteHeader() {
       >
         <div className="h-16 px-4 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5">
-            <Image
-              src="/logo.webp"
+          <Link href="/" className="flex items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo_broodjes_gebrook.png"
               alt="Broodjes & Meer Broodje Gebrook"
-              width={40}
-              height={40}
-              className="shrink-0 object-contain"
-              priority
+              className="h-11 w-auto object-contain"
             />
-            <span className="font-display text-xl font-bold text-[rgb(var(--text))]">Broodje Gebrook</span>
           </Link>
 
           {/* Account */}

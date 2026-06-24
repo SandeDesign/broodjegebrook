@@ -43,6 +43,20 @@ export const metadata: Metadata = {
     siteName: "Broodje Gebrook",
     title: "Broodje Gebrook. Verse broodjes & meer in Hoensbroek.",
     description: "Vers belegde broodjes, burgers, salades en meer. Bestel online. Afhalen of bezorgen.",
+    images: [
+      {
+        url: "/logo_broodjes_gebrook.png",
+        width: 894,
+        height: 636,
+        alt: "Broodjes & Meer Broodje Gebrook",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Broodje Gebrook. Verse broodjes & meer in Hoensbroek.",
+    description: "Vers belegde broodjes, burgers, salades en meer. Bestel online. Afhalen of bezorgen.",
+    images: ["/logo_broodjes_gebrook.png"],
   },
 };
 

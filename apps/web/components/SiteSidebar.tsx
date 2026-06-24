@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Home, UtensilsCrossed, ShoppingBag, Mail, ArrowRight, User, Info,
@@ -25,19 +24,13 @@ export function SiteSidebar() {
     <aside className="hidden lg:flex fixed left-0 top-0 h-full w-64 xl:w-72 flex-col bg-white border-r border-[rgb(var(--border))] z-50">
       {/* Logo / naam */}
       <div className="px-6 pt-8 pb-6 border-b border-[rgb(var(--border))]">
-        <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/logo.webp"
+        <Link href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo_broodjes_gebrook.png"
             alt="Broodjes & Meer Broodje Gebrook"
-            width={48}
-            height={48}
-            className="shrink-0 object-contain"
-            priority
+            className="h-14 w-auto object-contain"
           />
-          <div>
-            <div className="font-display text-lg font-bold text-[rgb(var(--text))] leading-tight">Broodje Gebrook</div>
-            <div className="text-[10px] uppercase tracking-[0.25em] text-[rgb(var(--text-soft))] mt-1 font-medium">Hoensbroek</div>
-          </div>
         </Link>
       </div>
 
