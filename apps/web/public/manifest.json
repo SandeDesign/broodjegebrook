@@ -1,21 +1,20 @@
 {
-  "name": "Eufraat — Pizzeria Shoarmazaak Geleen",
-  "short_name": "Eufraat",
-  "description": "Bestel verse pizza, shoarma en kapsalon bij Eufraat in Geleen. Afhalen of bezorgen.",
+  "name": "Broodjes & Meer Broodje Gebrook",
+  "short_name": "Broodje Gebrook",
+  "description": "Verse broodjes, burgers, tosti's en meer in Hoensbroek. Afhalen of laten bezorgen.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#07091c",
-  "theme_color": "#07091c",
+  "background_color": "#fafaf7",
+  "theme_color": "#2D6A4F",
   "lang": "nl",
   "dir": "ltr",
   "categories": ["food", "shopping", "lifestyle"],
   "icons": [
-    { "src": "/icon", "sizes": "32x32", "type": "image/png", "purpose": "any" },
-    { "src": "/apple-icon", "sizes": "180x180", "type": "image/png", "purpose": "any" },
-    { "src": "/icon-192", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/icon-512", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/favicon_32x32.png",  "sizes": "32x32",   "type": "image/png", "purpose": "any" },
+    { "src": "/icon_192x192.png",   "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon_512x512.png",   "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
   "shortcuts": [
     {
@@ -23,14 +22,14 @@
       "short_name": "Bestel",
       "description": "Direct bestellen",
       "url": "/bestellen",
-      "icons": [{ "src": "/icon-192", "sizes": "192x192" }]
+      "icons": [{ "src": "/icon_192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Menu",
       "short_name": "Menu",
       "description": "Bekijk de menukaart",
       "url": "/menukaart",
-      "icons": [{ "src": "/icon-192", "sizes": "192x192" }]
+      "icons": [{ "src": "/icon_192x192.png", "sizes": "192x192" }]
     }
   ]
 }
