@@ -5,13 +5,13 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Eufraat — Staff",
-  description: "Live orders, menu en CRM voor restaurant Eufraat",
+  title: "Broodje Gebrook — Staff",
+  description: "Live orders, menu en CRM voor Broodje Gebrook",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Eufraat Staff",
+    title: "Gebrook Staff",
   },
 };
 

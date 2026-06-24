@@ -62,8 +62,8 @@ export function AppShell({ children, requireRole }: { children: React.ReactNode;
       {!isBezorger && (
         <aside className="hidden w-64 flex-col border-r border-stone-200 bg-white p-4 md:flex">
           <div className="flex items-center gap-2 px-2 pb-6">
-            <div className="font-display text-xl font-bold text-eufraat-700">Eufraat</div>
-            <span className="rounded-md bg-eufraat-100 px-2 py-0.5 text-xs font-medium text-eufraat-700">
+            <div className="font-bold text-xl text-green-800">Broodje Gebrook</div>
+            <span className="rounded-md bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
               {role}
             </span>
           </div>
@@ -75,7 +75,7 @@ export function AppShell({ children, requireRole }: { children: React.ReactNode;
                 className={cn(
                   "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition",
                   pathname.startsWith(n.href)
-                    ? "bg-eufraat-50 text-eufraat-700"
+                    ? "bg-green-50 text-green-800"
                     : "text-stone-700 hover:bg-stone-50",
                 )}
               >
@@ -121,7 +121,7 @@ export function AppShell({ children, requireRole }: { children: React.ReactNode;
               className={cn(
                 "flex flex-1 flex-col items-center gap-1 py-2 text-xs",
                 pathname.startsWith(n.href)
-                  ? "text-eufraat-700"
+                  ? "text-green-800"
                   : "text-stone-500",
               )}
             >

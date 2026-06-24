@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteSidebar } from "@/components/SiteSidebar";
@@ -8,39 +8,38 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ThemeProvider, themeInitScript } from "@/lib/theme";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const fraunces = Fraunces({
+const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  axes: ["opsz"],
+  style: ["normal", "italic"],
 });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
   title: {
-    default: "Pizzeria Shoarma Eufraat Geleen | Verse pizza & shoarma bestellen",
-    template: "%s · Eufraat Geleen",
+    default: "Broodjes & Meer Broodje Gebrook | Verse broodjes in Hoensbroek",
+    template: "%s · Broodje Gebrook",
   },
   description:
-    "Pizzeria Shoarma Eufraat in Geleen. Verse pizza, shoarma en wraps voor bezorging of afhaal. Open vanaf 15:30. Bel 046 410 6745.",
-  metadataBase: new URL("https://eufraat.nl"),
+    "Vers belegde broodjes, burgers, tosti's en meer in Hoensbroek. Elke dag vers bereid. Afhalen of laten bezorgen. Mail info@broodjesgebrook.nl.",
+  metadataBase: new URL("https://broodjesgebrook.nl"),
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Eufraat",
+    statusBarStyle: "default",
+    title: "Broodje Gebrook",
   },
   openGraph: {
     type: "website",
     locale: "nl_NL",
-    siteName: "Eufraat Geleen",
-    title: "Eufraat. Pizzeria & Shoarmazaak Geleen",
-    description: "Verse pizza, shoarma en kapsalon. Bestel online. Afhalen of bezorgen.",
+    siteName: "Broodje Gebrook",
+    title: "Broodje Gebrook. Verse broodjes & meer in Hoensbroek.",
+    description: "Vers belegde broodjes, burgers, salades en meer. Bestel online. Afhalen of bezorgen.",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07091c",
+  themeColor: "#fafaf7",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -48,31 +47,22 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nl" className={`${inter.variable} ${fraunces.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="nl" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <head>
-        {/* Inline script: applies theme class before first paint to avoid FOUC */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="min-h-[100dvh] bg-ink text-cream">
+      <body className="min-h-[100dvh] bg-[rgb(var(--bg))] text-[rgb(var(--text))]">
         <ThemeProvider>
-          {/* Mobile-only top header */}
           <SiteHeader />
-
-          {/* Desktop sidebar */}
           <SiteSidebar />
-
-          {/* Content column — shifts right on desktop to clear sidebar */}
           <div className="lg:ml-64 xl:ml-72 flex flex-col min-h-screen">
             <main className="flex-1 pb-20 lg:pb-0">
               {children}
             </main>
-            {/* Footer: hidden on mobile (bottom nav takes over) */}
             <div className="hidden lg:block">
               <SiteFooter />
             </div>
           </div>
-
-          {/* Mobile bottom nav */}
           <BottomNav />
         </ThemeProvider>
       </body>

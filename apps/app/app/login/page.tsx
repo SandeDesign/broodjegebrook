@@ -37,13 +37,9 @@ export default function LoginPage() {
         <div className="flex flex-col items-center mb-8">
           <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-card ring-1 ring-gold/30 overflow-hidden mb-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://d1rhw9bys454w3.cloudfront.net/library/43810/conversions/logo_465x320-(20)-size-sm.webp"
-              alt="Eufraat"
-              className="h-10 w-10 object-contain"
-            />
+            <span className="font-bold text-xl text-gold italic">BG</span>
           </span>
-          <h1 className="text-2xl font-semibold text-cream tracking-tight">Eufraat Staff</h1>
+          <h1 className="text-2xl font-semibold text-cream tracking-tight">Broodje Gebrook Staff</h1>
           <p className="text-[13px] text-cream/55 mt-1.5">Log in om bestellingen te beheren.</p>
         </div>
 

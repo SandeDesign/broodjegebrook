@@ -1,40 +1,37 @@
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ArrowUpRight, Phone, Quote } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Mail, Quote, MapPin } from "lucide-react";
 import { Marquee } from "@/components/Marquee";
 import { OpenStatus } from "@/components/OpenStatus";
 import { restaurant, dayLabels, dayOrder, type DayKey } from "@/data/restaurant";
 import { getCurrentDayKey } from "@/lib/hours";
 
 const CATEGORY_CARDS = [
-  { id: "pizza",        name: "Pizza",        desc: "Versgebakken in de steenoven op 380°C",      emoji: "🍕", gradient: "from-red-900 via-orange-800 to-amber-700" },
-  { id: "gevuld",       name: "Calzone",      desc: "Dichtgevouwen pizza, overgoten met saus",    emoji: "🥟", gradient: "from-amber-900 via-orange-800 to-red-800" },
-  { id: "schotels",     name: "Schotels",     desc: "Dagvers gemarineerd vlees, saus naar keuze", emoji: "🍖", gradient: "from-stone-900 via-amber-900 to-orange-900" },
-  { id: "kapsalon",     name: "Kapsalon",     desc: "Friet, vlees, gesmolten kaas, salade",       emoji: "🍟", gradient: "from-amber-800 via-yellow-700 to-amber-900" },
-  { id: "durum",        name: "Dürüm",        desc: "Zacht flatbread met vlees en groenten",       emoji: "🌯", gradient: "from-amber-700 via-orange-700 to-stone-800" },
-  { id: "hamburgers",   name: "Hamburgers",   desc: "Handgevormde burgers van de grill",           emoji: "🍔", gradient: "from-amber-800 via-red-900 to-stone-900" },
-  { id: "pasta",        name: "Pasta",        desc: "Overbakken met kaas, spaghetti of macaroni",  emoji: "🍝", gradient: "from-red-800 via-amber-800 to-yellow-800" },
-  { id: "broodjes",     name: "Broodjes",     desc: "Turks brood of pita. Vers belegd.",            emoji: "🥖", gradient: "from-amber-700 via-yellow-800 to-stone-800" },
-  { id: "menus",        name: "Menu's",       desc: "Combinaties met friet en drank erbij",         emoji: "🍱", gradient: "from-orange-900 via-amber-800 to-stone-900" },
-  { id: "friet",        name: "Friet",        desc: "Krokant gebakken, klein of groot",             emoji: "🍟", gradient: "from-yellow-700 via-amber-700 to-orange-800" },
-  { id: "snacks",       name: "Snacks",       desc: "Klassiekers met een twist",                    emoji: "🌭", gradient: "from-stone-800 via-amber-800 to-orange-800" },
-  { id: "bijgerechten", name: "Bijgerechten", desc: "Salades en kleine extra's",                    emoji: "🥗", gradient: "from-emerald-900 via-green-800 to-amber-800" },
-  { id: "extras",       name: "Extra's",      desc: "Sauzen en porties naar keuze",                 emoji: "🧂", gradient: "from-stone-800 via-amber-900 to-stone-900" },
-  { id: "dranken",      name: "Dranken",      desc: "Fris, traditioneel of warm",                   emoji: "🥤", gradient: "from-blue-900 via-slate-800 to-stone-900" },
+  { id: "broodjes",     name: "Broodjes",       desc: "Vers belegd met de lekkerste ingrediënten",  emoji: "🥖", bg: "bg-amber-50",   border: "border-amber-200" },
+  { id: "burgers",      name: "Burgers",         desc: "Vers rundvlees, kaas en knapperig brood",    emoji: "🍔", bg: "bg-red-50",     border: "border-red-200" },
+  { id: "uitsmijters",  name: "Uitsmijters",     desc: "3 eieren, ham en kaas op stevig brood",      emoji: "🍳", bg: "bg-yellow-50",  border: "border-yellow-200" },
+  { id: "stokbroodjes", name: "Stokbroodjes",    desc: "Krokant stokbrood met jouw favoriete vulling",emoji: "🥖", bg: "bg-orange-50",  border: "border-orange-200" },
+  { id: "salades",      name: "Salades",         desc: "Fris, knapperig en voedzaam",                emoji: "🥗", bg: "bg-green-50",   border: "border-green-200" },
+  { id: "bagels",       name: "Bagels",          desc: "Zacht en vers belegd",                       emoji: "🫓", bg: "bg-stone-50",   border: "border-stone-200" },
+  { id: "tostis",       name: "Tosti's",         desc: "Goudbruin geroosterd met kaas en beleg",     emoji: "🥪", bg: "bg-yellow-50",  border: "border-yellow-200" },
+  { id: "wraps",        name: "Wraps",           desc: "Gevuld en strak gerold",                     emoji: "🌯", bg: "bg-lime-50",    border: "border-lime-200" },
+  { id: "sauzen",       name: "Sauzen",          desc: "Negen sauzen naar keuze",                    emoji: "🧂", bg: "bg-stone-50",   border: "border-stone-200" },
+  { id: "frisdranken",  name: "Frisdranken",     desc: "Fris en koel",                               emoji: "🥤", bg: "bg-blue-50",    border: "border-blue-200" },
+  { id: "snoep",        name: "Snoepzakjes",     desc: "Een leuk zakje als afsluiter",               emoji: "🍬", bg: "bg-pink-50",    border: "border-pink-200" },
 ] as const;
 
 const popular = [
-  { id: "1", name: "Pizza Margherita", description: "Tomatensaus, mozzarella, verse basilicum", price: 9.50, tags: ["populair"] },
-  { id: "2", name: "Shoarma groot schotel", description: "Dagvers gemarineerd, met friet, salade en saus naar keuze", price: 14.00, tags: ["populair"] },
-  { id: "3", name: "Kapsalon shoarma", description: "Friet, shoarma, gesmolten kaas, salade en saus", price: 12.00, tags: ["populair"] },
-  { id: "4", name: "Pizza shoarma speciaal", description: "Mozzarella, shoarmavlees, uien, paprika en saus", price: 13.50, tags: ["populair"] },
-  { id: "5", name: "Dürüm kebab", description: "Zacht flatbread, verse groenten, knoflooksaus", price: 9.00, tags: [] },
-  { id: "6", name: "Gyros schotel", description: "Gekruid varkensvlees, tzatziki, friet en pita", price: 14.50, tags: [] },
+  { id: "1", name: "Stokbroodje carpaccio",  description: "Carpaccio, rucola, pijnboompitten, truffelmayonaise en zongedroogde tomaat", price: 8.95 },
+  { id: "2", name: "Bacon burger",           description: "Vers rundvlees, sla, tomaat, komkommer, augurk, saus, kaas en bacon",         price: 11.25 },
+  { id: "3", name: "Broodje teriyaki kip",   description: "Lente ui, atjar tjampoer, knoflook, kipfilet en teriyaki saus",               price: 8.95 },
+  { id: "4", name: "Bagel gerookte zalm",    description: "Zalm, roomkaas, kappertjes, rucola en pijnboompitten",                        price: 8.95 },
+  { id: "5", name: "Caesarsalade",           description: "Pijnboompitten, rucola, croutons, cherrytomaat, honing-mosterd en gegrilde kip", price: 8.95 },
+  { id: "6", name: "Tosti teriyaki",         description: "Kip teriyaki, atjar tampur, lente-ui en knoflook",                            price: 6.95 },
 ];
 
 const reviews = [
-  { name: "Fatima A.", location: "Geleen", rating: 5, body: "Beste pizza van de regio. De bodem is perfect knapperig en de toppings zijn altijd vers. Bestel hier elke week!" },
-  { name: "Kevin M.", location: "Sittard", rating: 5, body: "Shoarma is echt geweldig. Sappig, goed gekruid en de sauzen zijn heerlijk. Snel geleverd ook. Aanrader!" },
-  { name: "Lotte V.", location: "Geleen", rating: 5, body: "Eindelijk een eigen bestelsite zonder Bistroo. Makkelijk bestellen en altijd lekker. Goede keuze!" },
+  { name: "Marieke V.",  location: "Hoensbroek", rating: 5, body: "Het beste stokbroodje carpaccio van de regio! Vers, knapperig en royaal belegd. Ik kom hier elke dag voor de lunch." },
+  { name: "Thomas B.",   location: "Brunssum",   rating: 5, body: "Fantastische bacon burger — het vlees was zo mals en alles was super vers. Snel klaar en vriendelijke bediening. Zeker terug!" },
+  { name: "Sandra K.",   location: "Hoensbroek", rating: 5, body: "Fijn dat ze nu ook online bestellen hebben. Makkelijk, snel bezorgd en altijd vers. Top zaak!" },
 ];
 
 const today = getCurrentDayKey();
@@ -43,48 +40,56 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/hero-pizza.webp" alt="Pizza uit de steenoven van Eufraat" className="absolute inset-0 h-full w-full object-cover scale-105" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/65 via-ink/40 to-ink" />
-        <div className="absolute inset-0 noise" />
+      <section className="relative min-h-[90svh] flex items-end bg-[rgb(var(--accent))] overflow-hidden">
+        {/* Zachte abstracte achtergrond — geometrisch groen */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-[60%] h-full bg-[rgb(var(--accent-soft)/0.15)] rounded-bl-[40%]" />
+          <div className="absolute bottom-0 left-0 w-[40%] h-[50%] bg-white/5 rounded-tr-[50%]" />
+          {/* Warm accent-vlek */}
+          <div className="absolute top-16 right-16 w-48 h-48 rounded-full bg-[rgb(var(--warm)/0.25)] blur-3xl" />
+          <div className="absolute bottom-24 left-8 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
+        </div>
 
-        <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 h-full flex flex-col">
-          <div className="flex-1 flex items-end pb-8 sm:pb-10">
-            <div className="grid w-full grid-cols-2 sm:grid-cols-12 gap-4 sm:gap-6 items-end pt-32">
-              <div className="sm:col-span-6">
-                <p className="text-[11px] uppercase tracking-[0.3em] text-gold mb-6 sm:mb-8 flex items-center gap-3 font-medium">
-                  <span className="h-px w-8 bg-gold" />
-                  Geleen · NL
-                </p>
-                <h1 className="font-display font-medium leading-[0.85] tracking-[-0.04em]">
-                  <span className="block text-[18vw] sm:text-[12vw] lg:text-[9.5rem] italic text-cream">Vers</span>
-                  <span className="block text-[18vw] sm:text-[12vw] lg:text-[9.5rem] -mt-2 sm:-mt-4 text-gold/95">uit</span>
-                  <span className="block text-[18vw] sm:text-[12vw] lg:text-[9.5rem] -mt-2 sm:-mt-4 italic text-cream">de oven.</span>
-                </h1>
+        <div className="relative z-10 w-full mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
+          <div className="grid sm:grid-cols-12 gap-8 items-end">
+            <div className="sm:col-span-7">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-white/60 mb-6 flex items-center gap-3 font-medium">
+                <span className="h-px w-8 bg-white/40" />
+                Hoensbroek · NL
+              </p>
+              <h1 className="font-display font-bold leading-[0.9] tracking-[-0.02em]">
+                <span className="block text-[15vw] sm:text-[10vw] lg:text-[8rem] text-white">Vers</span>
+                <span className="block text-[15vw] sm:text-[10vw] lg:text-[8rem] -mt-2 text-white/70 italic">belegd.</span>
+                <span className="block text-[15vw] sm:text-[10vw] lg:text-[8rem] -mt-2 text-white">Elke dag.</span>
+              </h1>
+            </div>
+            <div className="sm:col-span-4 sm:col-start-9 flex flex-col gap-5 sm:items-end">
+              <OpenStatus service="delivery" />
+              <p className="text-sm sm:text-right text-white/70 leading-relaxed max-w-xs">
+                Ambachtelijke broodjes, burgers, salades en meer. Middenin Hoensbroek, elke dag met liefde bereid.
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/menukaart"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 h-11 text-[12px] uppercase tracking-[0.18em] font-semibold text-[rgb(var(--accent))] hover:bg-white/90 transition-colors"
+                >
+                  Bekijk het menu <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
-              <div className="sm:col-span-4 sm:col-start-9 flex flex-col gap-5 sm:items-end">
-                <OpenStatus service="delivery" />
-                <p className="text-sm sm:text-right text-cream/75 leading-relaxed max-w-xs">
-                  Een familiezaak waar de oven en de grill samenkomen. Vlak in het hart van Geleen.
-                </p>
-                <div className="flex items-center gap-3 mt-2">
-                  <Link href="/menukaart" className="inline-flex items-center gap-2 rounded-full bg-gold px-6 h-11 text-[12px] uppercase tracking-[0.18em] font-semibold text-ink hover:bg-gold-soft transition-colors">
-                    Bestellen <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-                <a href={`tel:${restaurant.phone}`} className="group flex items-center gap-2 text-cream/65 hover:text-cream transition-colors">
-                  <Phone className="h-3.5 w-3.5" />
-                  <span className="font-mono text-[12px] tracking-[0.15em] border-b border-transparent group-hover:border-gold/40">{restaurant.phoneDisplay}</span>
-                </a>
-              </div>
+              <a
+                href={`mailto:${restaurant.email}`}
+                className="group flex items-center gap-2 text-white/55 hover:text-white transition-colors"
+              >
+                <Mail className="h-3.5 w-3.5" />
+                <span className="font-mono text-[12px] tracking-[0.12em] border-b border-transparent group-hover:border-white/40">{restaurant.email}</span>
+              </a>
             </div>
           </div>
 
-          <div className="border-t border-line/[0.06] py-5 flex items-center justify-between">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-cream/55 font-medium">{dayLabels[today]}</div>
-            <a href="#manifesto" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-cream/70 hover:text-gold transition-colors font-medium">
-              Scroll <ArrowDown className="h-3.5 w-3.5" />
+          <div className="border-t border-white/15 mt-12 pt-5 flex items-center justify-between">
+            <div className="text-[11px] uppercase tracking-[0.25em] text-white/40 font-medium">{dayLabels[today]}</div>
+            <a href="#aanbod" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-white/60 hover:text-white transition-colors font-medium">
+              Ontdek <ArrowDown className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>
@@ -93,47 +98,52 @@ export default function HomePage() {
       {/* MARQUEE */}
       <Marquee />
 
-      {/* SIGNATURE DUO — direct na hero, klikt door naar de juiste categorie */}
-      <section id="signature" className="relative pt-16 sm:pt-24">
+      {/* SIGNATURE DUO */}
+      <section id="aanbod" className="py-16 sm:py-24 bg-white">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 mb-10 sm:mb-14">
           <div className="flex items-end justify-between gap-6">
             <div>
-              <div className="h-px w-12 bg-gold mb-4" />
-              <h2 className="font-display text-5xl sm:text-7xl font-medium italic leading-[0.9] text-balance text-cream">De grote twee.</h2>
+              <div className="h-1 w-10 bg-[rgb(var(--accent))] mb-4 rounded-full" />
+              <h2 className="font-display text-4xl sm:text-6xl font-bold leading-[0.9] text-[rgb(var(--text))]">
+                Onze twee<br />specialiteiten.
+              </h2>
             </div>
-            <Link href="/menukaart" className="hidden sm:inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-cream/70 hover:text-gold transition-colors group">
+            <Link href="/menukaart" className="hidden sm:inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-[rgb(var(--text-soft))] hover:text-[rgb(var(--accent))] transition-colors group">
               Volledig menu <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
-        <div className="grid md:grid-cols-2">
+        <div className="grid md:grid-cols-2 gap-px bg-[rgb(var(--border))]">
           <SignatureCard
-            number="01" kicker="Steenoven" title="Pizza" tagline="Vuur, deeg, geduld."
-            body="Onze pizza's worden gebakken op 380°C. Krokante bodem, romige mozzarella, San Marzano tomatensaus. Klassiek of pittig. Altijd vers."
-            image="/hero-pizza.webp" alt="Pizza Margherita uit de steenoven"
-            href="/menukaart#cat-pizza"
+            number="01" kicker="Ambachtelijk" title="Stokbroodjes" tagline="Krokant van buiten. Vers van binnen."
+            body="Achttien varianten stokbroodje — van carpaccio met truffelmayo tot klassiek ham en kaas. Elke dag vers gebakken brood, rijkelijk belegd."
+            placeholder="bg-amber-100"
+            alt="Vers stokbroodje van Broodje Gebrook"
+            href="/menukaart#cat-stokbroodjes"
           />
           <SignatureCard
-            number="02" kicker="Van de grill" title="Schotels" tagline="Dagvers gemarineerd."
-            body="Onze schotels worden dagvers bereid. Sappig vlees, saus naar keuze, salade en friet. Een complete maaltijd op één bord."
-            image="/hero-shoarma.webp" alt="Schotel specialiteit op het bord"
-            href="/menukaart#cat-schotels" invert
+            number="02" kicker="Van de grill" title="Burgers" tagline="Vers rundvlees. Elke dag."
+            body="Zes burgers van vers rundvlees — van de klassieke hamburger tot de royale hamburger speciaal met gebakken ei en ui."
+            placeholder="bg-red-100"
+            alt="Sappige burger van Broodje Gebrook"
+            href="/menukaart#cat-burgers"
+            invert
           />
         </div>
       </section>
 
-      {/* CATEGORIES — alle 14 hoofdstukken, elk klikbaar naar de juiste sectie */}
-      <section className="py-20 sm:py-32 bg-ink/60">
+      {/* CATEGORIEËN */}
+      <section className="py-20 sm:py-28 bg-[rgb(var(--bg))]">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-8 mb-12 sm:mb-16">
+          <div className="grid lg:grid-cols-12 gap-8 mb-12 sm:mb-14">
             <div className="lg:col-span-6">
-              <div className="h-px w-12 bg-gold mb-4" />
-              <h2 className="font-display text-5xl sm:text-6xl font-medium italic leading-[0.95] text-balance text-cream">
-                Alle<br />hoofdstukken.
+              <div className="h-1 w-10 bg-[rgb(var(--accent))] mb-4 rounded-full" />
+              <h2 className="font-display text-4xl sm:text-5xl font-bold leading-[0.95] text-balance text-[rgb(var(--text))]">
+                Elf categorieën.<br />Voor elk moment.
               </h2>
             </div>
-            <p className="lg:col-span-5 lg:col-start-8 text-cream/65 leading-relaxed self-end">
-              Veertien categorieën. Van versgebakken pizza tot dagverse shoarma, van krokante kapsalon tot een verzorgde menu-combinatie.
+            <p className="lg:col-span-5 lg:col-start-8 text-[rgb(var(--text-soft))] leading-relaxed self-end">
+              Van ambachtelijke stokbroodjes tot sappige burgers, van frisse salades tot warme tosti's — voor de lunch, voor onderweg, voor thuis.
             </p>
           </div>
 
@@ -142,39 +152,29 @@ export default function HomePage() {
               <Link
                 key={c.id}
                 href={`/menukaart#cat-${c.id}`}
-                className="group relative overflow-hidden rounded-2xl border border-line/[0.08] aspect-[4/5] transition-all duration-300 hover:border-gold/50 hover:scale-[1.02]"
+                className={`group relative overflow-hidden rounded-2xl border ${c.border} ${c.bg} aspect-[4/5] transition-all duration-200 hover:shadow-md hover:scale-[1.02] hover:border-[rgb(var(--accent)/0.4)]`}
               >
-                {/* Per-category gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-70 group-hover:opacity-90 transition-opacity duration-500`} />
-                {/* Noise + dark overlay for legibility */}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
-                <div className="absolute inset-0 noise" />
-
-                {/* Big emoji centerpiece */}
+                {/* Emoji */}
                 <div
-                  className="absolute inset-0 flex items-center justify-center pointer-events-none transition-transform duration-500 group-hover:scale-110"
-                  style={{ paddingBottom: "30%" }}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none transition-transform duration-300 group-hover:scale-110"
+                  style={{ paddingBottom: "28%" }}
                 >
-                  <span
-                    className="text-7xl sm:text-8xl select-none"
-                    style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.45))" }}
-                  >
-                    {c.emoji}
+                  <span className="text-6xl sm:text-7xl select-none">{c.emoji}</span>
+                </div>
+
+                {/* Pijl rechtsboven */}
+                <div className="absolute top-3 right-3">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/70 group-hover:bg-[rgb(var(--accent))] transition-colors duration-200">
+                    <ArrowUpRight className="h-3.5 w-3.5 text-[rgb(var(--text-soft))] group-hover:text-white transition-colors duration-200" />
                   </span>
                 </div>
 
-                <div className="relative h-full p-4 sm:p-5 flex flex-col justify-between">
-                  <div className="flex justify-end">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-ink/60 border border-line/15 group-hover:bg-gold group-hover:border-gold transition-all duration-300">
-                      <ArrowUpRight className="h-3.5 w-3.5 text-cream/80 group-hover:text-ink transition-colors duration-300" />
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-2xl sm:text-3xl font-medium italic leading-tight text-cream group-hover:text-gold transition-colors duration-300">
-                      {c.name}
-                    </h3>
-                    <p className="mt-1.5 text-[11px] sm:text-xs text-cream/65 leading-relaxed line-clamp-2">{c.desc}</p>
-                  </div>
+                {/* Tekst onderaan */}
+                <div className="absolute bottom-0 inset-x-0 p-4">
+                  <h3 className="font-display text-xl sm:text-2xl font-bold leading-tight text-[rgb(var(--text))] group-hover:text-[rgb(var(--accent))] transition-colors duration-200">
+                    {c.name}
+                  </h3>
+                  <p className="mt-1 text-[11px] text-[rgb(var(--text-soft))] leading-relaxed line-clamp-2">{c.desc}</p>
                 </div>
               </Link>
             ))}
@@ -182,40 +182,42 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* POPULAR */}
-      <section className="relative py-24 sm:py-40 overflow-hidden">
+      {/* POPULAIR */}
+      <section className="relative py-20 sm:py-32 bg-white">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             <div className="lg:col-span-5 lg:sticky lg:top-32">
-              <div className="h-px w-12 bg-gold mb-4" />
-              <h2 className="font-display text-5xl sm:text-6xl font-medium italic leading-[0.95] text-balance text-cream">
+              <div className="h-1 w-10 bg-[rgb(var(--accent))] mb-4 rounded-full" />
+              <h2 className="font-display text-4xl sm:text-5xl font-bold leading-[0.95] text-balance text-[rgb(var(--text))]">
                 Het beste<br />van het huis.
               </h2>
-              <p className="mt-6 text-cream/65 leading-relaxed max-w-md">
-                De gerechten waar onze gasten keer op keer voor terugkomen. Zorgvuldigheid in elke stap.
+              <p className="mt-5 text-[rgb(var(--text-soft))] leading-relaxed max-w-md">
+                De gerechten waar onze gasten keer op keer voor terugkomen. Elke dag met zorg bereid.
               </p>
-              <div className="mt-8 relative aspect-[4/5] max-w-sm overflow-hidden border border-line/10">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/ingredients-flatlay.webp" alt="Mediterrane ingrediënten" className="absolute inset-0 h-full w-full object-cover" />
-                <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-ink to-transparent">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-cream/70">Vers in de keuken. Vandaag.</p>
+
+              {/* Decoratief kleurvlak als placeholder voor foto */}
+              <div className="mt-8 relative aspect-[4/5] max-w-sm overflow-hidden rounded-2xl border border-[rgb(var(--border))] bg-gradient-to-br from-green-50 to-amber-50 flex items-center justify-center">
+                <div className="text-center p-8">
+                  <span className="text-6xl">🥖</span>
+                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.3em] text-[rgb(var(--text-soft))]">Vers in de keuken. Vandaag.</p>
                 </div>
               </div>
             </div>
+
             <div className="lg:col-span-7">
-              <ul className="divide-y divide-line/[0.08]">
+              <ul className="divide-y divide-[rgb(var(--border))]">
                 {popular.map((item, i) => (
                   <li key={item.id} className="py-6 first:pt-0 last:pb-0">
                     <article className="group">
                       <div className="flex items-baseline gap-4 sm:gap-6">
-                        <span className="font-mono text-[11px] tabular-nums text-cream/40 shrink-0 w-6">{String(i + 1).padStart(2, "0")}</span>
+                        <span className="font-mono text-[11px] tabular-nums text-[rgb(var(--text-soft)/0.5)] shrink-0 w-6">{String(i + 1).padStart(2, "0")}</span>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-baseline gap-3 flex-wrap">
-                            <h3 className="font-display text-xl sm:text-2xl font-medium leading-tight text-cream group-hover:text-gold transition-colors">{item.name}</h3>
-                            <span className="flex-1 mx-1 hidden sm:block border-b border-dashed border-line/15 translate-y-[-6px]" />
-                            <span className="font-display text-xl sm:text-2xl tabular-nums text-gold font-medium">€{item.price.toFixed(2).replace(".", ",")}</span>
+                            <h3 className="font-display text-xl sm:text-2xl font-bold leading-tight text-[rgb(var(--text))] group-hover:text-[rgb(var(--accent))] transition-colors">{item.name}</h3>
+                            <span className="flex-1 mx-1 hidden sm:block border-b border-dashed border-[rgb(var(--border))] translate-y-[-6px]" />
+                            <span className="font-display text-xl sm:text-2xl tabular-nums text-[rgb(var(--accent))] font-bold">€{item.price.toFixed(2).replace(".", ",")}</span>
                           </div>
-                          <p className="mt-1.5 text-sm text-cream/55 leading-relaxed">{item.description}</p>
+                          <p className="mt-1.5 text-sm text-[rgb(var(--text-soft))] leading-relaxed">{item.description}</p>
                         </div>
                       </div>
                     </article>
@@ -223,7 +225,7 @@ export default function HomePage() {
                 ))}
               </ul>
               <div className="mt-10">
-                <Link href="/menukaart" className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-line/20 bg-transparent hover:bg-line/[0.04] hover:border-gold/50 hover:text-gold text-cream font-mono text-[12px] uppercase tracking-[0.2em] transition-colors">
+                <Link href="/menukaart" className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-[rgb(var(--border))] bg-transparent hover:bg-[rgb(var(--accent))] hover:border-[rgb(var(--accent))] hover:text-white text-[rgb(var(--text))] font-mono text-[12px] uppercase tracking-[0.2em] transition-all">
                   Bekijk alle gerechten <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -232,46 +234,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* HOURS */}
-      <section className="relative bg-ink border-y border-line/[0.06] py-24 sm:py-32">
-        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "url(/restaurant-interior.webp)", backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/95 to-ink" />
-        <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+      {/* OPENINGSTIJDEN */}
+      <section className="relative bg-[rgb(var(--accent)/0.04)] border-y border-[rgb(var(--border))] py-20 sm:py-28">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="grid lg:grid-cols-12 gap-10 mb-12">
             <div className="lg:col-span-5">
-              <div className="h-px w-12 bg-gold mb-4" />
-              <h2 className="font-display text-5xl sm:text-6xl font-medium italic leading-[0.95] text-cream">Wanneer.</h2>
+              <div className="h-1 w-10 bg-[rgb(var(--accent))] mb-4 rounded-full" />
+              <h2 className="font-display text-4xl sm:text-5xl font-bold leading-[0.95] text-[rgb(var(--text))]">Wanneer.</h2>
             </div>
-            <p className="lg:col-span-5 lg:col-start-8 text-cream/65 leading-relaxed self-end">
-              Zes dagen per week staan we voor je klaar. Bezorging vanaf 16:00, afhalen al vanaf 15:30.{" "}
-              <span className="text-cream">Dinsdag rusten we uit.</span>
+            <p className="lg:col-span-5 lg:col-start-8 text-[rgb(var(--text-soft))] leading-relaxed self-end">
+              Maandag tot en met vrijdag bezorgen en afhalen. Zaterdag alleen afhalen.{" "}
+              <span className="text-[rgb(var(--text))] font-medium">Zondag rusten we uit.</span>
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-px bg-line/[0.06]">
+          <div className="grid md:grid-cols-2 gap-4">
             <HoursColumn label="Bezorging" service="delivery" today={today} />
             <HoursColumn label="Afhalen" service="pickup" today={today} />
+          </div>
+
+          {/* Adres CTA */}
+          <div className="mt-10 flex items-center gap-3">
+            <a
+              href={restaurant.social.googleMaps ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-full bg-[rgb(var(--accent))] text-white text-[12px] uppercase tracking-[0.18em] font-semibold hover:bg-[rgb(var(--accent-soft))] transition-colors"
+            >
+              <MapPin className="h-4 w-4" />
+              {restaurant.address.street}, {restaurant.address.city}
+            </a>
           </div>
         </div>
       </section>
 
-      {/* REVIEWS */}
-      <section className="py-24 sm:py-40">
+      {/* BEOORDELINGEN */}
+      <section id="reviews" className="py-20 sm:py-32 bg-white">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-          <div className="text-center mb-16 sm:mb-20">
-            <div className="mx-auto h-px w-12 bg-gold mb-4" />
-            <h2 className="font-display text-5xl sm:text-7xl font-medium italic leading-[0.9] text-balance max-w-4xl mx-auto text-cream">
+          <div className="text-center mb-14 sm:mb-20">
+            <div className="mx-auto h-1 w-10 bg-[rgb(var(--accent))] mb-4 rounded-full" />
+            <h2 className="font-display text-4xl sm:text-6xl font-bold leading-[0.9] text-balance max-w-3xl mx-auto text-[rgb(var(--text))]">
               Wat gasten<br />over ons zeggen.
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-px bg-line/[0.06]">
-            {reviews.map((r, i) => (
-              <figure key={r.name} className="relative bg-card p-8 sm:p-10">
-                <Quote className="absolute top-6 right-6 h-8 w-8 text-gold/15" />
-                <p className="text-[14px] text-gold mb-4">{"★".repeat(r.rating)}</p>
-                <blockquote className="font-display text-xl sm:text-2xl leading-[1.4] text-cream/90 italic text-balance">"{r.body}"</blockquote>
-                <figcaption className="mt-8 pt-6 border-t border-line/[0.08]">
-                  <p className="text-sm font-medium text-cream">{r.name}</p>
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-cream/50 mt-1 font-medium">{r.location}</p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {reviews.map((r) => (
+              <figure key={r.name} className="relative bg-[rgb(var(--bg))] border border-[rgb(var(--border))] rounded-2xl p-8 sm:p-10">
+                <Quote className="absolute top-6 right-6 h-7 w-7 text-[rgb(var(--accent)/0.12)]" />
+                <p className="text-[14px] text-[rgb(var(--accent))] mb-3">{"★".repeat(r.rating)}</p>
+                <blockquote className="font-display text-xl sm:text-2xl leading-[1.4] text-[rgb(var(--text)/0.85)] italic text-balance">"{r.body}"</blockquote>
+                <figcaption className="mt-8 pt-5 border-t border-[rgb(var(--border))]">
+                  <p className="text-sm font-semibold text-[rgb(var(--text))]">{r.name}</p>
+                  <p className="text-[11px] uppercase tracking-[0.2em] text-[rgb(var(--text-soft))] mt-1 font-medium">{r.location}</p>
                 </figcaption>
               </figure>
             ))}
@@ -280,26 +293,29 @@ export default function HomePage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative h-[80svh] min-h-[520px] overflow-hidden border-t border-line/[0.06]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/shoarma-wrap.webp" alt="Verse shoarma wrap" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/30" />
-        <div className="absolute inset-0 noise" />
-        <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 h-full flex items-center">
+      <section className="relative bg-[rgb(var(--accent))] py-24 sm:py-36 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-[50%] h-full bg-[rgb(var(--accent-soft)/0.2)] rounded-bl-[40%]" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="max-w-2xl">
-            <div className="h-px w-12 bg-gold mb-6" />
-            <h2 className="font-display text-6xl sm:text-8xl font-medium italic leading-[0.85] text-balance text-cream">
-              Honger?<br /><span className="text-gold">Wij staan klaar.</span>
+            <div className="h-1 w-10 bg-white/40 mb-6 rounded-full" />
+            <h2 className="font-display text-5xl sm:text-7xl font-bold leading-[0.85] text-balance text-white">
+              Honger?<br /><span className="text-white/70 italic">Wij staan klaar.</span>
             </h2>
-            <p className="mt-6 text-lg text-cream/75 max-w-md">
-              Bezorging tot diep in de avond, of bel direct voor afhalen. Klaar in een handomdraai.
+            <p className="mt-6 text-lg text-white/70 max-w-md leading-relaxed">
+              Bestel online of stuur een mail. Afhalen kan maandag tot en met zaterdag.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link href="/menukaart" className="inline-flex items-center gap-2 rounded-full bg-gold h-12 px-7 text-[12px] uppercase tracking-[0.2em] font-semibold text-ink hover:bg-gold-soft transition-colors">
+              <Link href="/menukaart" className="inline-flex items-center gap-2 rounded-full bg-white h-12 px-7 text-[12px] uppercase tracking-[0.2em] font-semibold text-[rgb(var(--accent))] hover:bg-white/90 transition-colors">
                 Bestel nu <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href={`tel:${restaurant.phone}`} className="inline-flex items-center gap-2 rounded-full border border-line/25 bg-line/[0.04] text-cream hover:bg-line/[0.1] h-12 px-7 text-[12px] uppercase tracking-[0.2em] font-medium transition-colors">
-                <Phone className="h-4 w-4" /> {restaurant.phoneDisplay}
+              <a
+                href={`mailto:${restaurant.email}`}
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 text-white hover:bg-white/20 h-12 px-7 text-[12px] uppercase tracking-[0.2em] font-medium transition-colors"
+              >
+                <Mail className="h-4 w-4" /> Mail ons
               </a>
             </div>
           </div>
@@ -309,24 +325,27 @@ export default function HomePage() {
   );
 }
 
-function SignatureCard({ number, kicker, title, tagline, body, image, alt, href, invert }: {
+function SignatureCard({ number, kicker, title, tagline, body, placeholder, alt, href, invert }: {
   number: string; kicker: string; title: string; tagline: string; body: string;
-  image: string; alt: string; href: string; invert?: boolean;
+  placeholder: string; alt: string; href: string; invert?: boolean;
 }) {
   return (
-    <Link href={href} className="group relative block aspect-[4/5] sm:aspect-[5/6] overflow-hidden">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={image} alt={alt} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
-      <div className={`absolute inset-0 ${invert ? "bg-gradient-to-t from-ink via-ink/40 to-ink/20" : "bg-gradient-to-t from-ink via-ink/30 to-ink/10"}`} />
+    <Link href={href} className={`group relative block aspect-[4/5] sm:aspect-[5/6] overflow-hidden ${placeholder}`}>
+      {/* Decoratief patroon als placeholder */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-[12rem] opacity-10 select-none">{title === "Stokbroodjes" ? "🥖" : "🍔"}</span>
+      </div>
+      <div className={`absolute inset-0 ${invert ? "bg-gradient-to-t from-black/40 via-black/10 to-transparent" : "bg-gradient-to-t from-black/30 via-transparent to-transparent"}`} />
+
       <div className="relative h-full flex flex-col justify-between p-7 sm:p-12">
         <div className="flex items-start justify-between">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-gold font-medium">{kicker}</span>
-          <ArrowUpRight className="h-5 w-5 text-cream/60 group-hover:text-gold transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
+          <span className="text-[11px] uppercase tracking-[0.25em] text-[rgb(var(--accent))] font-semibold bg-white/80 px-3 py-1 rounded-full">{kicker}</span>
+          <ArrowUpRight className="h-5 w-5 text-white/60 bg-black/20 rounded-full p-0.5 group-hover:bg-[rgb(var(--accent))] group-hover:text-white transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
         </div>
         <div>
-          <h3 className="font-display text-7xl sm:text-9xl font-medium italic leading-[0.9] text-cream">{title}</h3>
-          <p className="mt-4 font-display text-xl sm:text-2xl italic text-gold/95">"{tagline}"</p>
-          <p className="mt-5 max-w-sm text-sm text-cream/70 leading-relaxed">{body}</p>
+          <h3 className="font-display text-5xl sm:text-8xl font-bold leading-[0.9] text-white drop-shadow-lg">{title}</h3>
+          <p className="mt-3 font-display text-lg sm:text-xl italic text-white/80">"{tagline}"</p>
+          <p className="mt-4 max-w-sm text-sm text-white/70 leading-relaxed">{body}</p>
         </div>
       </div>
     </Link>
@@ -335,22 +354,27 @@ function SignatureCard({ number, kicker, title, tagline, body, image, alt, href,
 
 function HoursColumn({ label, service, today }: { label: string; service: "delivery" | "pickup"; today: DayKey }) {
   return (
-    <div className="bg-card p-7 sm:p-12">
-      <div className="flex items-center justify-between mb-8">
-        <h3 className="font-display text-3xl sm:text-4xl font-medium italic text-cream">{label}</h3>
+    <div className="bg-white rounded-2xl border border-[rgb(var(--border))] p-6 sm:p-8">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="font-display text-2xl sm:text-3xl font-bold text-[rgb(var(--text))]">{label}</h3>
         <OpenStatus service={service} variant="minimal" />
       </div>
-      <ul className="space-y-1">
+      <ul className="space-y-0.5">
         {dayOrder.map((day) => {
           const w = restaurant.hours[service][day];
           const isToday = day === today;
           return (
-            <li key={day} className={`flex items-baseline justify-between py-3 border-b border-line/[0.06] last:border-0 ${isToday ? "text-gold" : w ? "text-cream" : "text-cream/30"}`}>
-              <span className="flex items-baseline gap-3">
-                {isToday && <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-gold/80">→</span>}
+            <li
+              key={day}
+              className={`flex items-baseline justify-between py-2.5 border-b border-[rgb(var(--border))] last:border-0 ${
+                isToday ? "text-[rgb(var(--accent))]" : w ? "text-[rgb(var(--text))]" : "text-[rgb(var(--text-soft)/0.4)]"
+              }`}
+            >
+              <span className="flex items-baseline gap-2">
+                {isToday && <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[rgb(var(--accent))]">→</span>}
                 <span className="text-sm">{dayLabels[day]}</span>
               </span>
-              <span className="font-mono text-[12px] tabular-nums tracking-wide">{w ? `${w.open} tot ${w.close}` : "Gesloten"}</span>
+              <span className="font-mono text-[12px] tabular-nums tracking-wide">{w ? `${w.open}–${w.close}` : "Gesloten"}</span>
             </li>
           );
         })}

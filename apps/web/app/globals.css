@@ -3,88 +3,70 @@
 @tailwind utilities;
 
 /* ───────────────────────────────────────────────────────────────
-   Color tokens — semantic, theme-aware.
-   These are referenced by Tailwind via the names defined in the
-   shared tailwind-preset (ink/cream/gold/card swap with theme).
+   Color tokens — semantic, lunchroom palet.
+   Warm wit als basis, donkergroen als accent.
    ──────────────────────────────────────────────────────────────── */
-:root, html.dark {
-  /* Dark editorial palette (default) — RGB triplets so Tailwind /alpha works */
-  --gold: 233 185 73;
-  --gold-soft: 245 210 122;
-  --ink: 7 9 28;          /* page background */
-  --cream: 243 236 217;   /* page text */
-  --card: 14 18 48;       /* elevated surface */
-  --surface-2: 19 24 54;
-  --line: 255 255 255;    /* divider color */
-  --muted: 170 166 143;   /* secondary text */
-  --background: rgb(7 9 28);
-  --foreground: rgb(243 236 217);
+:root {
+  /* Licht lunchroom palet (default) */
+  --bg:          250 250 247;   /* warm wit pagina-achtergrond */
+  --surface:     255 255 255;   /* kaarten, modals */
+  --text:        26 26 24;      /* primaire tekst (bijna-zwart) */
+  --text-soft:   107 107 94;    /* secundaire tekst */
+  --accent:      45 106 79;     /* donkergroen — vers, ambachtelijk */
+  --accent-soft: 82 183 136;    /* hover, lichte accenten */
+  --warm:        244 162 97;    /* warm oranje — brood tint */
+  --warm-soft:   249 200 149;   /* lichte brood tint */
+  --border:      232 232 226;   /* randen */
+  --line:        26 26 24;      /* divider kleur basis */
+  --muted:       107 107 94;    /* secondary text */
 
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Fraunces", "Georgia", serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Legacy aliassen (gebruikt door bestaande componenten) */
+  --ink:         250 250 247;
+  --cream:       26 26 24;
+  --gold:        45 106 79;
+  --gold-soft:   82 183 136;
+  --card:        255 255 255;
+  --surface-2:   243 244 246;
+
+  --background: rgb(250 250 247);
+  --foreground: rgb(26 26 24);
+
+  --font-sans:    "Inter", system-ui, sans-serif;
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-mono:    "Inter", system-ui, sans-serif;
 }
 
-html.light {
-  /* Light editorial palette — warm paper, deep ink */
-  --gold: 184 130 27;
-  --gold-soft: 212 160 46;
-  --ink: 250 247 240;     /* page background (warm cream) */
-  --cream: 20 23 42;      /* page text (deep ink) */
-  --card: 255 255 255;
-  --surface-2: 243 238 226;
-  --line: 20 23 42;       /* dark dividers */
-  --muted: 90 95 116;
-  --background: rgb(250 247 240);
-  --foreground: rgb(20 23 42);
-}
-
-/* Smooth swap when toggling theme */
+/* Smooth scroll + theme transitions */
 html { transition: background-color 200ms ease; }
 body, header, nav, main, aside, section, article, div, span {
   transition-property: background-color, border-color, color;
-  transition-duration: 200ms;
+  transition-duration: 150ms;
   transition-timing-function: ease;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background: rgb(var(--ink));
-    color: rgb(var(--cream));
+    background: rgb(var(--bg));
+    color: rgb(var(--text));
   }
   body {
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    background: rgb(var(--ink));
-    color: rgb(var(--cream));
+    background: rgb(var(--bg));
+    color: rgb(var(--text));
   }
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
   ::selection {
-    background: rgb(var(--gold));
-    color: rgb(var(--ink));
+    background: rgb(var(--accent));
+    color: rgb(255 255 255);
   }
 }
 
 @layer utilities {
-  .noise::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.4;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .editorial-rule {
-    background: linear-gradient(90deg, transparent, rgb(var(--gold)) 30%, rgb(var(--gold)) 70%, transparent);
-    height: 1px;
-  }
-
   .marquee-track {
     display: flex;
     width: max-content;
@@ -96,15 +78,15 @@ body, header, nav, main, aside, section, article, div, span {
   }
 
   .text-balance { text-wrap: balance; }
-  .text-pretty { text-wrap: pretty; }
+  .text-pretty  { text-wrap: pretty; }
 
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { scrollbar-width: none; }
 
-  /* Theme-aware borders/surfaces. Use these instead of bg-white/X. */
-  .border-line   { border-color: rgb(var(--line) / 0.08); }
-  .border-line-2 { border-color: rgb(var(--line) / 0.14); }
-  .border-line-3 { border-color: rgb(var(--line) / 0.22); }
+  /* Semantic border/surface utilities */
+  .border-line   { border-color: rgb(var(--border)); }
+  .border-line-2 { border-color: rgb(var(--border) / 0.7); }
+  .border-line-3 { border-color: rgb(var(--border) / 0.5); }
 
   .bg-line   { background-color: rgb(var(--line) / 0.04); }
   .bg-line-2 { background-color: rgb(var(--line) / 0.07); }
@@ -115,13 +97,13 @@ body, header, nav, main, aside, section, article, div, span {
 
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
 }
 
 @keyframes pulseRing {
-  0%   { box-shadow: 0 0 0 0 rgba(233, 185, 73, 0.6); }
-  70%  { box-shadow: 0 0 0 14px rgba(233, 185, 73, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(233, 185, 73, 0); }
+  0%   { box-shadow: 0 0 0 0 rgba(45, 106, 79, 0.5); }
+  70%  { box-shadow: 0 0 0 14px rgba(45, 106, 79, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(45, 106, 79, 0); }
 }
 
 @keyframes fadeIn {
@@ -135,11 +117,11 @@ body, header, nav, main, aside, section, article, div, span {
 }
 
 @layer utilities {
-  .animate-in { animation-duration: 200ms; animation-fill-mode: both; }
-  .fade-in { animation-name: fadeIn; }
-  .slide-in-from-bottom { animation-name: slideInBottom; }
-  .duration-200 { animation-duration: 200ms; }
-  .duration-300 { animation-duration: 300ms; }
+  .animate-in             { animation-duration: 200ms; animation-fill-mode: both; }
+  .fade-in                { animation-name: fadeIn; }
+  .slide-in-from-bottom   { animation-name: slideInBottom; }
+  .duration-200           { animation-duration: 200ms; }
+  .duration-300           { animation-duration: 300ms; }
   .line-clamp-1 {
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -158,17 +140,16 @@ body, header, nav, main, aside, section, article, div, span {
 * { -webkit-tap-highlight-color: transparent; }
 html, body { overscroll-behavior-y: none; }
 
-/* Paint theme bg behind status bar */
 html, body {
-  background-color: rgb(var(--ink));
+  background-color: rgb(var(--bg));
 }
 
 @supports (padding-top: env(safe-area-inset-top)) {
-  .pt-safe { padding-top: env(safe-area-inset-top); }
-  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-  .pl-safe { padding-left: env(safe-area-inset-left); }
-  .pr-safe { padding-right: env(safe-area-inset-right); }
-  .h-safe-top { height: env(safe-area-inset-top); }
+  .pt-safe  { padding-top: env(safe-area-inset-top); }
+  .pb-safe  { padding-bottom: env(safe-area-inset-bottom); }
+  .pl-safe  { padding-left: env(safe-area-inset-left); }
+  .pr-safe  { padding-right: env(safe-area-inset-right); }
+  .h-safe-top    { height: env(safe-area-inset-top); }
   .h-safe-bottom { height: env(safe-area-inset-bottom); }
   .pt-page-mobile { padding-top: calc(env(safe-area-inset-top) + 5rem); }
 }

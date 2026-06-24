@@ -96,7 +96,7 @@ export const useCart = create<CartState>()(
       setPostcode: (postcode) => set({ postcode }),
       setTime: (iso) => set({ requestedTimeIso: iso }),
     }),
-    { name: "eufraat-cart" },
+    { name: "gebrook-cart" },
   ),
 );
 

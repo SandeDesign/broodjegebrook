@@ -1,7 +1,7 @@
 {
-  "name": "Eufraat — Staff",
-  "short_name": "Eufraat Staff",
-  "description": "Live orders, menu, klanten en rapporten voor Eufraat",
+  "name": "Broodje Gebrook — Staff",
+  "short_name": "Gebrook Staff",
+  "description": "Live orders, menu, klanten en rapporten voor Broodje Gebrook",
   "start_url": "/orders",
   "scope": "/",
   "display": "standalone",
