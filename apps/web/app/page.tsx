@@ -67,7 +67,7 @@ export default function HomePage() {
             <div className="sm:col-span-7">
               <p className="text-[11px] uppercase tracking-[0.3em] text-white/85 mb-6 flex items-center gap-3 font-medium">
                 <span className="h-px w-8 bg-white/60" />
-                Hoensbroek · NL
+                Hoensbroek. NL
               </p>
               <h1 className="font-display font-bold leading-[0.9] tracking-[-0.02em]">
                 <span className="block text-[15vw] sm:text-[10vw] lg:text-[8rem] text-white">Vers</span>
@@ -128,14 +128,14 @@ export default function HomePage() {
         <div className="grid md:grid-cols-2 gap-px bg-[rgb(var(--border))]">
           <SignatureCard
             number="01" kicker="Ambachtelijk" title="Stokbroodjes" tagline="Krokant van buiten. Vers van binnen."
-            body="Achttien varianten stokbroodje — van carpaccio met truffelmayo tot klassiek ham en kaas. Elke dag vers gebakken brood, rijkelijk belegd."
+            body="Achttien varianten stokbroodje. Van carpaccio met truffelmayo tot klassiek ham en kaas. Elke dag vers gebakken brood, rijkelijk belegd."
             placeholder="bg-amber-100"
             alt="Vers stokbroodje van Broodje Gebrook"
             href="/menukaart#cat-stokbroodjes"
           />
           <SignatureCard
             number="02" kicker="Van de grill" title="Burgers" tagline="Vers rundvlees. Elke dag."
-            body="Zes burgers van vers rundvlees — van de klassieke hamburger tot de royale hamburger speciaal met gebakken ei en ui."
+            body="Zes burgers van vers rundvlees. Van de klassieke hamburger tot de royale hamburger speciaal met gebakken ei en ui."
             placeholder="bg-red-100"
             alt="Sappige burger van Broodje Gebrook"
             href="/menukaart#cat-burgers"
@@ -155,7 +155,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="lg:col-span-5 lg:col-start-8 text-[rgb(var(--text-soft))] leading-relaxed self-end">
-              Van ambachtelijke stokbroodjes tot sappige burgers, van frisse salades tot warme tosti's — voor de lunch, voor onderweg, voor thuis.
+              Van ambachtelijke stokbroodjes tot sappige burgers, van frisse salades tot warme tosti's. Voor de lunch, voor onderweg, voor thuis.
             </p>
           </div>
 

@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: {
     default: "Broodjes & Meer Broodje Gebrook | Verse broodjes in Hoensbroek",
-    template: "%s · Broodje Gebrook",
+    template: "%s. Broodje Gebrook",
   },
   description:
     "Vers belegde broodjes, burgers, tosti's en meer in Hoensbroek. Elke dag vers bereid. Afhalen of laten bezorgen. Mail info@broodjesgebrook.nl.",

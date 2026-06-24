@@ -15,7 +15,7 @@ export function SiteFooter() {
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 pt-16 sm:pt-24 pb-10">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <p className="text-[10px] uppercase tracking-[0.4em] text-white/60 mb-4 font-medium">Broodjeszaak · Lunchroom</p>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-white/60 mb-4 font-medium">Broodjeszaak. Lunchroom</p>
             <h2 className="font-display text-4xl sm:text-5xl font-bold italic leading-[0.95] text-balance text-white">
               Tot ziens.<br /><span className="text-white/70">Eet smakelijk.</span>
             </h2>
@@ -75,7 +75,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-16 sm:mt-24 pt-6 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[11px] font-mono uppercase tracking-[0.2em] text-white/40">
-          <span>© {new Date().getFullYear()} · {restaurant.name}</span>
+          <span>© {new Date().getFullYear()} {restaurant.name}</span>
           <span>Eigen platform. Geen commissie.</span>
           <span className="hidden sm:inline">Hoensbroek, NL</span>
         </div>

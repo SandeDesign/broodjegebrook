@@ -113,7 +113,7 @@ export function ItemModal({ item, onClose }: { item: MenuItem | null; onClose: (
           {/* Sauzen — optioneel, meerdere mogelijk */}
           {sauceList.length > 0 && (
             <Section label="Sauzen">
-              <p className="text-[11px] text-cream/40 mb-3 -mt-1">+€0,50 per saus · meerdere mogelijk</p>
+              <p className="text-[11px] text-cream/40 mb-3 -mt-1">+€0,50 per saus. Meerdere mogelijk</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {sauceList.map((s) => {
                   const checked = sauces.includes(s);
