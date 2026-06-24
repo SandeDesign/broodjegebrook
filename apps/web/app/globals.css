@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────────────────────────────────────────────
+   Color tokens — semantic, theme-aware.
+   These are referenced by Tailwind via the names defined in the
+   shared tailwind-preset (ink/cream/gold/card swap with theme).
+   ──────────────────────────────────────────────────────────────── */
+:root, html.dark {
+  /* Dark editorial palette (default) — RGB triplets so Tailwind /alpha works */
+  --gold: 233 185 73;
+  --gold-soft: 245 210 122;
+  --ink: 7 9 28;          /* page background */
+  --cream: 243 236 217;   /* page text */
+  --card: 14 18 48;       /* elevated surface */
+  --surface-2: 19 24 54;
+  --line: 255 255 255;    /* divider color */
+  --muted: 170 166 143;   /* secondary text */
+  --background: rgb(7 9 28);
+  --foreground: rgb(243 236 217);
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html.light {
+  /* Light editorial palette — warm paper, deep ink */
+  --gold: 184 130 27;
+  --gold-soft: 212 160 46;
+  --ink: 250 247 240;     /* page background (warm cream) */
+  --cream: 20 23 42;      /* page text (deep ink) */
+  --card: 255 255 255;
+  --surface-2: 243 238 226;
+  --line: 20 23 42;       /* dark dividers */
+  --muted: 90 95 116;
+  --background: rgb(250 247 240);
+  --foreground: rgb(20 23 42);
+}
+
+/* Smooth swap when toggling theme */
+html { transition: background-color 200ms ease; }
+body, header, nav, main, aside, section, article, div, span {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: rgb(var(--ink));
+    color: rgb(var(--cream));
+  }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    background: rgb(var(--ink));
+    color: rgb(var(--cream));
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: rgb(var(--gold));
+    color: rgb(var(--ink));
+  }
+}
+
+@layer utilities {
+  .noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .editorial-rule {
+    background: linear-gradient(90deg, transparent, rgb(var(--gold)) 30%, rgb(var(--gold)) 70%, transparent);
+    height: 1px;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+
+  .pulse-ring {
+    animation: pulseRing 2.4s infinite;
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { scrollbar-width: none; }
+
+  /* Theme-aware borders/surfaces. Use these instead of bg-white/X. */
+  .border-line   { border-color: rgb(var(--line) / 0.08); }
+  .border-line-2 { border-color: rgb(var(--line) / 0.14); }
+  .border-line-3 { border-color: rgb(var(--line) / 0.22); }
+
+  .bg-line   { background-color: rgb(var(--line) / 0.04); }
+  .bg-line-2 { background-color: rgb(var(--line) / 0.07); }
+  .bg-line-3 { background-color: rgb(var(--line) / 0.10); }
+
+  .text-muted-fg { color: rgb(var(--muted)); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(233, 185, 73, 0.6); }
+  70%  { box-shadow: 0 0 0 14px rgba(233, 185, 73, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(233, 185, 73, 0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInBottom {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@layer utilities {
+  .animate-in { animation-duration: 200ms; animation-fill-mode: both; }
+  .fade-in { animation-name: fadeIn; }
+  .slide-in-from-bottom { animation-name: slideInBottom; }
+  .duration-200 { animation-duration: 200ms; }
+  .duration-300 { animation-duration: 300ms; }
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Mobile: tap-highlight off + smooth momentum scroll */
+* { -webkit-tap-highlight-color: transparent; }
+html, body { overscroll-behavior-y: none; }
+
+/* Paint theme bg behind status bar */
+html, body {
+  background-color: rgb(var(--ink));
+}
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  .pt-safe { padding-top: env(safe-area-inset-top); }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+  .pl-safe { padding-left: env(safe-area-inset-left); }
+  .pr-safe { padding-right: env(safe-area-inset-right); }
+  .h-safe-top { height: env(safe-area-inset-top); }
+  .h-safe-bottom { height: env(safe-area-inset-bottom); }
+  .pt-page-mobile { padding-top: calc(env(safe-area-inset-top) + 5rem); }
+}

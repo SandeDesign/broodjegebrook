@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #07091c;
+  --cream: #f3ecd9;
+  --gold: #e9b949;
+  --gold-soft: #f5d27a;
+  --card: #0e1230;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+html, body {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes pulseNew {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(233, 185, 73, 0.6); }
+  50% { box-shadow: 0 0 0 14px rgba(233, 185, 73, 0); }
+}
+
+.order-card-new {
+  animation: pulseNew 1.6s ease-out infinite;
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { scrollbar-width: none; }
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+html, body { overscroll-behavior-y: none; }

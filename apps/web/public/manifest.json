@@ -1,0 +1,36 @@
+{
+  "name": "Eufraat — Pizzeria Shoarmazaak Geleen",
+  "short_name": "Eufraat",
+  "description": "Bestel verse pizza, shoarma en kapsalon bij Eufraat in Geleen. Afhalen of bezorgen.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07091c",
+  "theme_color": "#07091c",
+  "lang": "nl",
+  "dir": "ltr",
+  "categories": ["food", "shopping", "lifestyle"],
+  "icons": [
+    { "src": "/icon", "sizes": "32x32", "type": "image/png", "purpose": "any" },
+    { "src": "/apple-icon", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-192", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Bestel",
+      "short_name": "Bestel",
+      "description": "Direct bestellen",
+      "url": "/bestellen",
+      "icons": [{ "src": "/icon-192", "sizes": "192x192" }]
+    },
+    {
+      "name": "Menu",
+      "short_name": "Menu",
+      "description": "Bekijk de menukaart",
+      "url": "/menukaart",
+      "icons": [{ "src": "/icon-192", "sizes": "192x192" }]
+    }
+  ]
+}
