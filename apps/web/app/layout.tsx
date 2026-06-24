@@ -22,7 +22,11 @@ export const metadata: Metadata = {
   },
   description:
     "Vers belegde broodjes, burgers, tosti's en meer in Hoensbroek. Elke dag vers bereid. Afhalen of laten bezorgen. Mail info@broodjesgebrook.nl.",
-  metadataBase: new URL("https://broodjesgebrook.nl"),
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "https://broodjesgebrook.nl"
+  ),
   manifest: "/manifest.json",
   icons: {
     icon: [
