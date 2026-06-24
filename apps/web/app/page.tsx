@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowDown, ArrowRight, ArrowUpRight, Mail, Quote, MapPin } from "lucide-react";
 import { Marquee } from "@/components/Marquee";
 import { OpenStatus } from "@/components/OpenStatus";
@@ -40,16 +41,18 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-[90svh] flex items-end overflow-hidden" style={{ backgroundColor: "rgb(var(--accent))" }}>
+      <section className="relative min-h-[90svh] flex items-center overflow-hidden" style={{ backgroundColor: "rgb(var(--accent))" }}>
         {/* Achtergrond: foto of geometrisch groen patroon */}
         {restaurant.heroImage ? (
           <>
-            <img
+            <Image
               src={restaurant.heroImage}
               alt="Broodjes & Meer Broodje Gebrook"
-              className="absolute inset-0 h-full w-full object-cover"
+              fill
+              className="object-cover"
+              priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/65" />
+            <div className="absolute inset-0 bg-black/45" />
           </>
         ) : (
           <div className="absolute inset-0">
@@ -61,7 +64,7 @@ export default function HomePage() {
         )}
 
         <div className="relative z-10 w-full mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
-          <div className="grid sm:grid-cols-12 gap-8 items-end">
+          <div className="grid sm:grid-cols-12 gap-8 items-center">
             <div className="sm:col-span-7">
               <p className="text-[11px] uppercase tracking-[0.3em] text-white/60 mb-6 flex items-center gap-3 font-medium">
                 <span className="h-px w-8 bg-white/40" />
