@@ -40,15 +40,25 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-[90svh] flex items-end bg-[rgb(var(--accent))] overflow-hidden">
-        {/* Zachte abstracte achtergrond — geometrisch groen */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[60%] h-full bg-[rgb(var(--accent-soft)/0.15)] rounded-bl-[40%]" />
-          <div className="absolute bottom-0 left-0 w-[40%] h-[50%] bg-white/5 rounded-tr-[50%]" />
-          {/* Warm accent-vlek */}
-          <div className="absolute top-16 right-16 w-48 h-48 rounded-full bg-[rgb(var(--warm)/0.25)] blur-3xl" />
-          <div className="absolute bottom-24 left-8 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
-        </div>
+      <section className="relative min-h-[90svh] flex items-end overflow-hidden" style={{ backgroundColor: "rgb(var(--accent))" }}>
+        {/* Achtergrond: foto of geometrisch groen patroon */}
+        {restaurant.heroImage ? (
+          <>
+            <img
+              src={restaurant.heroImage}
+              alt="Broodjes & Meer Broodje Gebrook"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/65" />
+          </>
+        ) : (
+          <div className="absolute inset-0">
+            <div className="absolute top-0 right-0 w-[60%] h-full bg-[rgb(var(--accent-soft)/0.15)] rounded-bl-[40%]" />
+            <div className="absolute bottom-0 left-0 w-[40%] h-[50%] bg-white/5 rounded-tr-[50%]" />
+            <div className="absolute top-16 right-16 w-48 h-48 rounded-full bg-[rgb(var(--warm)/0.25)] blur-3xl" />
+            <div className="absolute bottom-24 left-8 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
+          </div>
+        )}
 
         <div className="relative z-10 w-full mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
           <div className="grid sm:grid-cols-12 gap-8 items-end">
