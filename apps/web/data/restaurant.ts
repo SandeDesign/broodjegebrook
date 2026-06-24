@@ -5,6 +5,7 @@ export const restaurant = {
   name: "Broodjes & Meer Broodje Gebrook",
   shortName: "Broodje Gebrook",
   logo: "/logo.webp",
+  heroImage: "/hero.jpg" as string | null,
   phone: null as null,
   phoneDisplay: null as null,
   email: "info@broodjesgebrook.nl",
