@@ -19,7 +19,7 @@ export function ItemModal({ item, onClose }: { item: MenuItem | null; onClose: (
   const add = useSimpleCart((s) => s.add);
   const [qty, setQty] = React.useState(1);
   const [size, setSize] = React.useState<string | undefined>();
-  const [sauce, setSauce] = React.useState<string | undefined>();
+  const [sauces, setSauces] = React.useState<string[]>([]);
   const [extras, setExtras] = React.useState<{ name: string; price: number }[]>([]);
   const [removed, setRemoved] = React.useState<string[]>([]);
   const [note, setNote] = React.useState("");
@@ -28,13 +28,12 @@ export function ItemModal({ item, onClose }: { item: MenuItem | null; onClose: (
   const sauceList = item ? categorySauces[item.categoryId] ?? [] : [];
   const sizeList = item ? categorySizes[item.categoryId] ?? [] : [];
   const ingredients = item ? parseIngredients(item.description) : [];
-  const sauceRequired = sauceList.length > 0;
 
   React.useEffect(() => {
     if (!item) return;
     setQty(1);
     setSize(categorySizes[item.categoryId]?.[0]);
-    setSauce(undefined);
+    setSauces([]);
     setExtras([]);
     setRemoved([]);
     setNote("");
@@ -49,12 +48,16 @@ export function ItemModal({ item, onClose }: { item: MenuItem | null; onClose: (
   if (!item) return null;
 
   const extraTotal = extras.reduce((s, e) => s + e.price, 0);
-  const unit = item.price + extraTotal;
+  const sauceTotal = sauces.length * 0.50;
+  const unit = item.price + extraTotal + sauceTotal;
   const total = unit * qty;
-  const isValid = !sauceRequired || sauce !== undefined;
 
   const toggleExtra = (e: { name: string; price: number }) => {
     setExtras((cur) => (cur.some((x) => x.name === e.name) ? cur.filter((x) => x.name !== e.name) : [...cur, e]));
+  };
+
+  const toggleSauce = (name: string) => {
+    setSauces((cur) => cur.includes(name) ? cur.filter((s) => s !== name) : [...cur, name]);
   };
 
   const toggleRemoved = (i: string) => {
@@ -62,10 +65,10 @@ export function ItemModal({ item, onClose }: { item: MenuItem | null; onClose: (
   };
 
   const handleAdd = () => {
-    if (!isValid) return;
+    const sauceExtras = sauces.map((s) => ({ name: s, price: 0.50 }));
     add({
       itemId: item.id, name: item.name, basePrice: item.price, qty,
-      size, sauce, extras, removed, note,
+      size, sauce: undefined, extras: [...extras, ...sauceExtras], removed, note,
     });
     onClose();
   };
@@ -107,13 +110,32 @@ export function ItemModal({ item, onClose }: { item: MenuItem | null; onClose: (
             </Section>
           )}
 
-          {/* Saus */}
+          {/* Sauzen — optioneel, meerdere mogelijk */}
           {sauceList.length > 0 && (
-            <Section label="Saus" required>
+            <Section label="Sauzen">
+              <p className="text-[11px] text-cream/40 mb-3 -mt-1">+€0,50 per saus · meerdere mogelijk</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {sauceList.map((s) => (
-                  <Choice key={s} label={s} selected={sauce === s} onClick={() => setSauce(s)} />
-                ))}
+                {sauceList.map((s) => {
+                  const checked = sauces.includes(s);
+                  return (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => toggleSauce(s)}
+                      className={cn(
+                        "flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-left text-sm transition-colors active:scale-[0.98]",
+                        checked
+                          ? "border-gold bg-gold/10 text-cream"
+                          : "border-line/[0.08] bg-line/[0.02] text-cream/75 hover:border-line/25 hover:text-cream"
+                      )}
+                    >
+                      <span className={cn("inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-md border", checked ? "border-gold bg-gold" : "border-line/30")}>
+                        {checked && <Check className="h-3 w-3 text-ink" strokeWidth={3} />}
+                      </span>
+                      {s}
+                    </button>
+                  );
+                })}
               </div>
             </Section>
           )}
@@ -174,7 +196,7 @@ export function ItemModal({ item, onClose }: { item: MenuItem | null; onClose: (
             </Section>
           )}
 
-          {/* Note */}
+          {/* Opmerking */}
           <Section label="Opmerking">
             <textarea
               value={note}
@@ -200,11 +222,10 @@ export function ItemModal({ item, onClose }: { item: MenuItem | null; onClose: (
           </div>
           <button
             type="button"
-            disabled={!isValid}
             onClick={handleAdd}
-            className="flex-1 inline-flex items-center justify-center h-12 rounded-full bg-gold text-ink text-[14px] font-semibold hover:bg-gold-soft active:scale-[0.98] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex-1 inline-flex items-center justify-center h-12 rounded-full bg-gold text-ink text-[14px] font-semibold hover:bg-gold-soft active:scale-[0.98] transition-all"
           >
-            {isValid ? `Toevoegen · ${fmt(total)}` : "Kies eerst een saus"}
+            Toevoegen · {fmt(total)}
           </button>
         </div>
       </div>
