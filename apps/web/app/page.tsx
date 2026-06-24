@@ -337,17 +337,21 @@ export default function HomePage() {
   );
 }
 
-function SignatureCard({ number, kicker, title, tagline, body, placeholder, alt, href, invert }: {
+function SignatureCard({ number, kicker, title, tagline, body, placeholder, alt, href, invert, image }: {
   number: string; kicker: string; title: string; tagline: string; body: string;
-  placeholder: string; alt: string; href: string; invert?: boolean;
+  placeholder: string; alt: string; href: string; invert?: boolean; image?: string | null;
 }) {
   return (
-    <Link href={href} className={`group relative block aspect-[4/5] sm:aspect-[5/6] overflow-hidden ${placeholder}`}>
-      {/* Decoratief patroon als placeholder */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-[12rem] opacity-10 select-none">{title === "Stokbroodjes" ? "🥖" : "🍔"}</span>
-      </div>
-      <div className={`absolute inset-0 ${invert ? "bg-gradient-to-t from-black/40 via-black/10 to-transparent" : "bg-gradient-to-t from-black/30 via-transparent to-transparent"}`} />
+    <Link href={href} className={`group relative block aspect-[4/5] sm:aspect-[5/6] overflow-hidden ${image ? "bg-black" : placeholder}`}>
+      {image ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={image} alt={alt} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-[12rem] opacity-10 select-none">{title === "Stokbroodjes" ? "🥖" : "🍔"}</span>
+        </div>
+      )}
+      <div className={`absolute inset-0 ${image ? "bg-gradient-to-t from-black/60 via-black/20 to-black/10" : invert ? "bg-gradient-to-t from-black/40 via-black/10 to-transparent" : "bg-gradient-to-t from-black/30 via-transparent to-transparent"}`} />
 
       <div className="relative h-full flex flex-col justify-between p-7 sm:p-12">
         <div className="flex items-start justify-between">
