@@ -4,7 +4,7 @@ export interface OpeningWindow { open: string; close: string; }
 export const restaurant = {
   name: "Broodjes & Meer Broodje Gebrook",
   shortName: "Broodje Gebrook",
-  logo: "/logo.webp",
+  logo: "/logo_broodjes_gebrook.png",
   heroImage: "/hero.jpg" as string | null,
   phone: null as null,
   phoneDisplay: null as null,
