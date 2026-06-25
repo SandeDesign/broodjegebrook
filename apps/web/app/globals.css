@@ -4,7 +4,7 @@
 
 /* ───────────────────────────────────────────────────────────────
    Color tokens — semantic, lunchroom palet.
-   Warm wit als basis, donkergroen als accent.
+   Warm wit als basis, oranje (logo) als accent.
    ──────────────────────────────────────────────────────────────── */
 :root {
   /* Licht lunchroom palet (default) */
@@ -12,8 +12,8 @@
   --surface:     255 255 255;   /* kaarten, modals */
   --text:        26 26 24;      /* primaire tekst (bijna-zwart) */
   --text-soft:   107 107 94;    /* secundaire tekst */
-  --accent:      45 106 79;     /* donkergroen — vers, ambachtelijk */
-  --accent-soft: 82 183 136;    /* hover, lichte accenten */
+  --accent:      232 80 10;     /* oranje — logo kleur */
+  --accent-soft: 240 130 60;    /* hover, lichte accenten */
   --warm:        244 162 97;    /* warm oranje — brood tint */
   --warm-soft:   249 200 149;   /* lichte brood tint */
   --border:      232 232 226;   /* randen */
@@ -23,8 +23,8 @@
   /* Legacy aliassen (gebruikt door bestaande componenten) */
   --ink:         250 250 247;
   --cream:       26 26 24;
-  --gold:        45 106 79;
-  --gold-soft:   82 183 136;
+  --gold:        232 80 10;
+  --gold-soft:   240 130 60;
   --card:        255 255 255;
   --surface-2:   243 244 246;
 

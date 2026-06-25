@@ -36,7 +36,7 @@ export function BottomNav() {
             <span className={cn(
               "inline-flex h-10 w-10 items-center justify-center rounded-full transition-all",
               onMenu
-                ? "bg-[rgb(var(--accent))] text-white shadow-[0_2px_12px_rgba(45,106,79,0.4)]"
+                ? "bg-[rgb(var(--accent))] text-white shadow-[0_2px_12px_rgba(232,80,10,0.4)]"
                 : "bg-[rgb(var(--accent)/0.1)] text-[rgb(var(--accent))]",
             )}>
               <UtensilsCrossed className="h-5 w-5" />
