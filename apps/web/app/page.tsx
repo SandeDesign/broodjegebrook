@@ -40,7 +40,7 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-[100svh] sm:min-h-[90svh] flex items-stretch sm:items-center overflow-hidden" style={{ backgroundColor: "rgb(var(--accent))" }}>
+      <section className="relative min-h-[calc(100svh-5rem)] sm:min-h-[90svh] flex items-stretch sm:items-center overflow-hidden" style={{ backgroundColor: "rgb(var(--accent))" }}>
         {/* Achtergrond: foto of geometrisch groen patroon */}
         {restaurant.heroImage ? (
           <>
