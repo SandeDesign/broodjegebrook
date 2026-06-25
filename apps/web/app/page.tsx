@@ -40,7 +40,7 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-[90svh] flex items-center overflow-hidden" style={{ backgroundColor: "rgb(var(--accent))" }}>
+      <section className="relative min-h-[100svh] sm:min-h-[90svh] flex items-stretch sm:items-center overflow-hidden" style={{ backgroundColor: "rgb(var(--accent))" }}>
         {/* Achtergrond: foto of geometrisch groen patroon */}
         {restaurant.heroImage ? (
           <>
@@ -62,45 +62,34 @@ export default function HomePage() {
           </div>
         )}
 
-        <div className="relative z-10 w-full mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
-          <div className="grid sm:grid-cols-12 gap-8 items-center">
-            <div className="sm:col-span-7">
-              <p className="text-[11px] uppercase tracking-[0.3em] text-white/85 mb-6 flex items-center gap-3 font-medium">
-                <span className="h-px w-8 bg-white/60" />
-                Hoensbroek. NL
-              </p>
-              <h1 className="font-display font-bold leading-[0.9] tracking-[-0.02em]">
-                <span className="block text-[15vw] sm:text-[10vw] lg:text-[8rem] text-white">Vers</span>
-                <span className="block text-[15vw] sm:text-[10vw] lg:text-[8rem] -mt-2 text-white italic">belegd.</span>
-                <span className="block text-[15vw] sm:text-[10vw] lg:text-[8rem] -mt-2 text-white">Elke dag.</span>
-              </h1>
-            </div>
-            <div className="sm:col-span-4 sm:col-start-9 flex flex-col gap-5 sm:items-end">
-              <OpenStatus service="delivery" />
-              <p className="text-sm sm:text-right text-white/90 leading-relaxed max-w-xs">
-                Ambachtelijke broodjes, burgers, salades en meer. Middenin Hoensbroek, elke dag met liefde bereid.
-              </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <Link
-                  href="/menukaart"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 h-11 text-[12px] uppercase tracking-[0.18em] font-semibold text-[rgb(var(--accent))] hover:bg-white/90 transition-colors"
-                >
-                  Bekijk het menu <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-              <a
-                href={`mailto:${restaurant.email}`}
-                className="group flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-              >
-                <Mail className="h-3.5 w-3.5" />
-                <span className="font-mono text-[12px] tracking-[0.12em] border-b border-transparent group-hover:border-white/40">{restaurant.email}</span>
-              </a>
-            </div>
+        <div className="relative z-10 w-full flex-1 sm:flex-none mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 pt-28 pb-8 sm:py-24
+            flex flex-col justify-between sm:grid sm:grid-cols-12 sm:gap-8 sm:items-center">
+
+          <div className="sm:col-span-7">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-white/75 mb-10 flex items-center gap-3 font-medium">
+              <span className="h-px w-8 bg-white/50" />
+              Hoensbroek. NL
+            </p>
+            <h1 className="font-display font-bold leading-[0.88] tracking-[-0.02em]">
+              <span className="block text-[17vw] sm:text-[10vw] lg:text-[8rem] text-white">Vers</span>
+              <span className="block text-[17vw] sm:text-[10vw] lg:text-[8rem] text-white italic">belegd.</span>
+              <span className="block text-[17vw] sm:text-[10vw] lg:text-[8rem] text-white">Elke dag.</span>
+            </h1>
           </div>
 
-          <div className="border-t border-white/25 mt-12 pt-5 flex items-center justify-between">
-            <div className="text-[11px] uppercase tracking-[0.25em] text-white/70 font-medium">{dayLabels[today]}</div>
-            <a href="#aanbod" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-white/85 hover:text-white transition-colors font-medium">
+          <div className="sm:col-span-4 sm:col-start-9 flex flex-col gap-6 sm:items-end mt-10 sm:mt-0">
+            <OpenStatus service="delivery" />
+            <Link
+              href="/menukaart"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 h-12 text-[12px] uppercase tracking-[0.18em] font-semibold text-[rgb(var(--accent))] hover:bg-white/90 transition-colors"
+            >
+              Bekijk het menu <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="sm:col-span-12 border-t border-white/20 mt-10 sm:mt-12 pt-5 flex items-center justify-between">
+            <div className="text-[11px] uppercase tracking-[0.25em] text-white/60 font-medium">{dayLabels[today]}</div>
+            <a href="#aanbod" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-white/75 hover:text-white transition-colors font-medium">
               Ontdek <ArrowDown className="h-3.5 w-3.5" />
             </a>
           </div>

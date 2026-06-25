@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     template: "%s. Broodje Gebrook",
   },
   description:
-    "Vers belegde broodjes, burgers, tosti's en meer in Hoensbroek. Elke dag vers bereid. Afhalen of laten bezorgen. Mail info@broodjesgebrook.nl.",
+    "Vers belegde broodjes, burgers, tosti's en meer in Hoensbroek. Elke dag vers bereid. Afhalen of laten bezorgen. Mail info@broodjegebrook.nl.",
   metadataBase: new URL(
     process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
-      : "https://broodjesgebrook.nl"
+      : "https://broodjegebrook.nl"
   ),
   manifest: "/manifest.json",
   icons: {

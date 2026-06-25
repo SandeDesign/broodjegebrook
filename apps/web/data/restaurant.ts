@@ -8,7 +8,7 @@ export const restaurant = {
   heroImage: "/hero.jpg" as string | null,
   phone: null as null,
   phoneDisplay: null as null,
-  email: "info@broodjesgebrook.nl",
+  email: "info@broodjegebrook.nl",
   address: { street: "Nieuwstraat 23", city: "Hoensbroek", postcode: "6431 KP" },
   social: {
     whatsapp: null as null,
