@@ -121,6 +121,7 @@ export default function HomePage() {
             placeholder="bg-amber-100"
             alt="Vers stokbroodje van Broodje Gebrook"
             href="/menukaart#cat-stokbroodjes"
+            image="/IMG_0425.png"
           />
           <SignatureCard
             number="02" kicker="Van de grill" title="Burgers" tagline="Vers rundvlees. Elke dag."
@@ -129,6 +130,7 @@ export default function HomePage() {
             alt="Sappige burger van Broodje Gebrook"
             href="/menukaart#cat-burgers"
             invert
+            image="/IMG_0424.png"
           />
         </div>
       </section>
