@@ -350,7 +350,7 @@ function SignatureCard({ number, kicker, title, tagline, body, placeholder, alt,
           <ArrowUpRight className="h-5 w-5 text-white/60 bg-black/20 rounded-full p-0.5 group-hover:bg-[rgb(var(--accent))] group-hover:text-white transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
         </div>
         <div>
-          <h3 className="font-display text-5xl sm:text-8xl font-bold leading-[0.9] text-white drop-shadow-lg">{title}</h3>
+          <h3 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[0.9] text-white drop-shadow-lg">{title}</h3>
           <p className="mt-3 font-display text-lg sm:text-xl italic text-white/80">"{tagline}"</p>
           <p className="mt-4 max-w-sm text-sm text-white/70 leading-relaxed">{body}</p>
         </div>
